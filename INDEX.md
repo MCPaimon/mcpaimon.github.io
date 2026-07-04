@@ -9,9 +9,17 @@ This file is the entry point for any agent working in this repository. Read it f
 | Path | Purpose |
 |---|---|
 | AGENTS.md | Primary agent instruction set (workflow, branching, commits, content rules). |
+| DESIGN.md | Design system: theme tokens, components, motion, and rules for changing the site. |
 | README.md | Project overview. |
 | INDEX.md | This file. |
 
-## Site Content
+## Site Content (`docs/`, served by GitHub Pages)
 
-The website content is served from the `docs/` directory once it exists. Until then, this repository contains only documentation files.
+| Path | Purpose |
+|---|---|
+| docs/.nojekyll | Disables Jekyll processing so the site is served as plain static files. |
+| docs/index.html | `/` — how the MCAgents main plugin works. |
+| docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
+| docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
+| docs/assets/style.css | Shared stylesheet (white/silver/modern theme, tokens, components, transitions). |
+| docs/assets/script.js | Page transition controller (fade out on internal navigation). |
