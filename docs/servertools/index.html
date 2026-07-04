@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServerTools — Server Tools for MCAgents | MCPaimon</title>
+  <meta name="description" content="ServerTools is the MCAgents extension that gives AI agents permission-aware tools for server status, performance, and configuration on PaperMC, SpigotMC, and FoliaMC.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../">MCAgents</a>
+        <a href="../playertools/">PlayerTools</a>
+        <a href="./" aria-current="page">ServerTools</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Extension</span>
+      <h1>ServerTools gives agents<br><span class="metallic">server insight</span></h1>
+      <p class="lead">
+        ServerTools extends MCAgents with a compact set of tools about the server
+        itself: performance, latency, address, and installed plugins. Like every
+        extension, it only adds tools to the plugin — no route of its own on the
+        central server.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/MCPaimon/extension-servertools" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="button ghost" href="../playertools/">See PlayerTools</a>
+      </div>
+      <div class="platforms" aria-label="Supported platforms">
+        <span>PaperMC</span>
+        <span>SpigotMC</span>
+        <span>FoliaMC</span>
+      </div>
+    </div>
+
+    <section>
+      <h2>How it works</h2>
+      <p class="section-intro">
+        When the MCAgents plugin loads, ServerTools registers its tools under the
+        <code>server</code> category. Players can ask about health and latency, while
+        sensitive details stay behind operator checks written into the tools themselves.
+      </p>
+      <ol class="steps">
+        <li>
+          <h3>Someone asks about the server</h3>
+          <p>"Is the server lagging?", "What is my ping?", or an operator asking "Which plugins are running?" The agent picks the matching tool.</p>
+        </li>
+        <li>
+          <h3>The tool gathers live data</h3>
+          <p>Each tool reads the answer straight from the running server at the moment of the question — nothing is cached or estimated.</p>
+        </li>
+        <li>
+          <h3>Sensitive data stays gated</h3>
+          <p>The server's address and its plugin list identify your infrastructure, so those tools verify OP status in code before answering.</p>
+        </li>
+        <li>
+          <h3>Platform differences are handled</h3>
+          <p>Tick statistics come from an interface that only PaperMC and FoliaMC provide; on SpigotMC the tool answers with a clear explanation instead of failing.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>The tools</h2>
+      <p class="section-intro">
+        Four tools cover the questions server owners hear the most.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <span class="tool-name">get_server_tick</span><span class="badge everyone">Everyone</span><span class="badge platform">Paper / Folia</span>
+          <p>Reports the tick rate averages for the last one, five, and fifteen minutes — the quickest way to see whether the server is keeping up. On SpigotMC it explains that tick data is unavailable.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">get_server_ping</span><span class="badge everyone">Everyone</span>
+          <p>Measures the latency between the asking player and the server, in milliseconds.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">get_server_ip</span><span class="badge op">OP only</span>
+          <p>Reveals the address and port the server runs on. Restricted to operators because it identifies your infrastructure.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">get_server_plugin</span><span class="badge op">OP only</span>
+          <p>Lists every plugin currently installed and active, so operators can audit the server through the agent.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        The permission checks described here are written directly into each tool's
+        code, so they hold no matter how the agent is prompted. Details live in the
+        <a href="https://github.com/MCPaimon/extension-servertools" target="_blank" rel="noopener">extension-servertools</a> repository.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>© 2026 MCPaimon</span>
+      <span>
+        <a href="../">MCAgents</a> ·
+        <a href="../playertools/">PlayerTools</a> ·
+        <a href="https://github.com/MCPaimon/extension-servertools" target="_blank" rel="noopener">Repository</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../assets/script.js"></script>
+</body>
+</html>

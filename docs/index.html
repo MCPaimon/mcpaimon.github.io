@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCAgents — AI Agents for Minecraft Servers | MCPaimon</title>
+  <meta name="description" content="MCAgents is the MCPaimon plugin that brings AI agents into Minecraft servers on PaperMC, SpigotMC, and FoliaMC. Learn how the plugin, its extensions, and the central API server work together.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="./"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="./" aria-current="page">MCAgents</a>
+        <a href="playertools/">PlayerTools</a>
+        <a href="servertools/">ServerTools</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Main Plugin</span>
+      <h1>Bring <span class="metallic">AI agents</span> into your<br>Minecraft server</h1>
+      <p class="lead">
+        MCAgents is the MCPaimon main plugin. It lets players and operators talk to AI
+        agents in game, and it gives those agents safe, permission-aware tools to read
+        and manage the server.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="button ghost" href="playertools/">Explore extensions</a>
+      </div>
+      <div class="platforms" aria-label="Supported platforms">
+        <span>PaperMC</span>
+        <span>SpigotMC</span>
+        <span>FoliaMC</span>
+      </div>
+    </div>
+
+    <section>
+      <h2>How it works</h2>
+      <p class="section-intro">
+        The plugin sits between your players and the AI platform of your choice.
+        Every conversation flows through the same five stages.
+      </p>
+      <ol class="steps">
+        <li>
+          <h3>A player talks to the agent</h3>
+          <p>Players use the <code>/ai</code> command (alias <code>/mcagents</code>) to ask one-off questions, or switch into a dedicated chat mode where every message goes straight to the agent.</p>
+        </li>
+        <li>
+          <h3>The plugin resolves the session</h3>
+          <p>Each player has an active session: the AI platform and model they selected, plus the token that authorizes them. Operators register platforms and models once; players pick from them.</p>
+        </li>
+        <li>
+          <h3>The agent thinks and calls tools</h3>
+          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the tools that extensions have registered — always inside the permission rules of the tool.</p>
+        </li>
+        <li>
+          <h3>Tools respect Minecraft permissions</h3>
+          <p>Every tool checks who is asking. Regular players can only query themselves, while operator-only tools verify OP status in code before doing anything.</p>
+        </li>
+        <li>
+          <h3>Everything is stored centrally</h3>
+          <p>Platforms, models, accounts, sessions, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>The central API server</h2>
+      <p class="section-intro">
+        MCAgents can keep its data in a local database, or delegate storage to the
+        central Express.js server that powers the wider MCEngine/MCPaimon ecosystem.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>One route for the plugin</h3>
+          <p>The plugin speaks to the central server through the <code>/api/mcagents</code> route, which stores AI platforms, models, accounts, active sessions, and logs.</p>
+        </div>
+        <div class="card">
+          <h3>Token-protected</h3>
+          <p>Every request carries a Bearer token, and the server enforces rate limits, so only trusted game servers can read or write agent data.</p>
+        </div>
+        <div class="card">
+          <h3>Shared across servers</h3>
+          <p>Because storage is centralized, players keep their platforms, sessions, and history when they hop between the Minecraft servers of a network.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Extensions</h2>
+      <p class="section-intro">
+        The plugin stays small on purpose. Capabilities come from extensions, which
+        only add tools, commands, and listeners to MCAgents — they never need their
+        own route on the central server. All extensions run on PaperMC, SpigotMC,
+        and FoliaMC.
+      </p>
+      <div class="grid">
+        <a class="card" href="playertools/">
+          <h3>PlayerTools</h3>
+          <p>Player information and administration: identity, health, food, bans, IP checks, and operator audits — all permission-aware.</p>
+          <span class="more">How PlayerTools works →</span>
+        </a>
+        <a class="card" href="servertools/">
+          <h3>ServerTools</h3>
+          <p>Server health at a glance: tick rate, player latency, address details, and the installed plugin list for operators.</p>
+          <span class="more">How ServerTools works →</span>
+        </a>
+        <div class="card">
+          <h3>Core</h3>
+          <p>The foundation extension: the <code>/ai</code> command itself, the chat listener, token management tools, and dynamic custom tool loading.</p>
+          <span class="more"><a href="https://github.com/MCPaimon/extension-core" target="_blank" rel="noopener" style="color:inherit">Repository ↗</a></span>
+        </div>
+        <div class="card">
+          <h3>Template</h3>
+          <p>A ready-made boilerplate for building your own extension, mirroring the structure used by every official extension.</p>
+          <span class="more"><a href="https://github.com/MCPaimon/extension-template" target="_blank" rel="noopener" style="color:inherit">Repository ↗</a></span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Everyday commands</h2>
+      <p class="section-intro">
+        Everything is reachable from a single command, explained here in plain words.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Ask</h3>
+          <p>Send the agent one question and get one answer — no mode switching, no setup beyond an active session.</p>
+        </div>
+        <div class="card">
+          <h3>Chat mode</h3>
+          <p>Toggle a personal conversation mode where your chat messages go to the agent until you leave the session.</p>
+        </div>
+        <div class="card">
+          <h3>Active platform &amp; model</h3>
+          <p>Choose which registered AI platform and which of its models your session should use.</p>
+        </div>
+        <div class="card">
+          <h3>Tokens</h3>
+          <p>Store, change, inspect, or remove the API token that authorizes you on a platform. Creating new platforms and models is reserved for operators.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        This site explains how the ecosystem works. Setup guides, configuration
+        references, and source code live in the repositories on
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>© 2026 MCPaimon</span>
+      <span>
+        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">MCAgents</a> ·
+        <a href="https://github.com/MCPaimon/extension-playertools" target="_blank" rel="noopener">PlayerTools</a> ·
+        <a href="https://github.com/MCPaimon/extension-servertools" target="_blank" rel="noopener">ServerTools</a> ·
+        <a href="https://github.com/MCEngine/server-expressjs" target="_blank" rel="noopener">Central Server</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
