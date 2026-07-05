@@ -15,7 +15,9 @@ requires a different look, update this document **first**, then the stylesheet.
 
 ## 2. Tokens
 
-All tokens are defined once in `docs/assets/style.css` under `:root`. Never hardcode
+All tokens are defined once under `:root` in the shared stylesheet
+`https://mcengine.github.io/styles/main/style.css` (source:
+`docs/styles/main/style.css` in `MCEngine/mcengine.github.io`). Never hardcode
 raw values in components; always use the tokens.
 
 ### Colors
@@ -81,7 +83,8 @@ Reuse these components; do not invent parallel variants.
 
 ## 4. Motion (page transitions)
 
-Implemented in `docs/assets/style.css` (keyframes) + `docs/assets/script.js`.
+Implemented in the shared assets: `https://mcengine.github.io/styles/main/style.css`
+(keyframes) + `https://mcengine.github.io/scripts/main/script.js`.
 
 - **Enter:** every page fades in and rises 10px, `0.45s ease-out` (`page-in`),
   pure CSS so it works without JavaScript.
@@ -98,12 +101,14 @@ Implemented in `docs/assets/style.css` (keyframes) + `docs/assets/script.js`.
 
 ## 5. Layout & pages
 
-- Served by GitHub Pages from the `docs/` directory (`docs/.nojekyll` disables Jekyll).
+- Served by GitHub Pages from the `docs/` directory. Never create `.nojekyll` files.
 - Routes: `/` (MCAgents main plugin), `/playertools/`, `/servertools/` — each a
   directory with an `index.html`. New pages follow the same pattern and must be added
   to the header navigation of **all** pages.
-- Shared assets live in `docs/assets/` (`style.css`, `script.js`). Pages reference
-  them relatively (`assets/…` from the root page, `../assets/…` from subpages).
+- Shared assets are hosted by `MCEngine/mcengine.github.io` and imported absolutely:
+  `https://mcengine.github.io/styles/main/style.css` and
+  `https://mcengine.github.io/scripts/main/script.js` (never raw content URLs,
+  never local copies).
 - Page skeleton (keep this order): header → hero → "How it works" steps → content
   sections (cards) → notice → footer.
 - Every page sets a unique `<title>` ("Name — Description | MCPaimon") and

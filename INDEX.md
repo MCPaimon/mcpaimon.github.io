@@ -17,9 +17,13 @@ This file is the entry point for any agent working in this repository. Read it f
 
 | Path | Purpose |
 |---|---|
-| docs/.nojekyll | Disables Jekyll processing so the site is served as plain static files. |
 | docs/index.html | `/` — how the MCAgents main plugin works. |
 | docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
 | docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
-| docs/assets/style.css | Shared stylesheet (white/silver/modern theme, tokens, components, transitions). |
-| docs/assets/script.js | Page transition controller (fade out on internal navigation). |
+
+## Shared Theme Assets
+
+The pages carry no local stylesheets or scripts. They import the shared MCEngine theme (white/silver/modern, defined by `DESIGN.md` in this repository, hosted by `MCEngine/mcengine.github.io`):
+
+- `https://mcengine.github.io/styles/main/style.css` — tokens, components, page transitions.
+- `https://mcengine.github.io/scripts/main/script.js` — page transition controller.
