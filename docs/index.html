@@ -58,7 +58,7 @@
         </li>
         <li>
           <h3>The agent thinks and calls tools</h3>
-          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the tools that extensions have registered — always inside the permission rules of the tool.</p>
+          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the plugin's built-in tools or the tools that extensions have registered — always inside the permission rules of the tool.</p>
         </li>
         <li>
           <h3>Tools respect Minecraft permissions</h3>
@@ -96,10 +96,11 @@
     <section>
       <h2>Extensions</h2>
       <p class="section-intro">
-        The plugin stays small on purpose. Capabilities come from extensions, which
-        only add tools, commands, and listeners to MCAgents — they never need their
-        own route on the central server. All extensions run on PaperMC, SpigotMC,
-        and FoliaMC.
+        The essentials ship inside the plugin itself: the <code>/ai</code> command,
+        the chat listener, token management tools, and dynamic custom tool loading.
+        Extensions build on that core — they only add tools, commands, and listeners
+        to MCAgents and never need their own route on the central server. All
+        extensions run on PaperMC, SpigotMC, and FoliaMC.
       </p>
       <div class="grid">
         <a class="card" href="playertools/">
@@ -112,11 +113,6 @@
           <p>Server health at a glance: tick rate, player latency, address details, and the installed plugin list for operators.</p>
           <span class="more">How ServerTools works →</span>
         </a>
-        <div class="card">
-          <h3>Core</h3>
-          <p>The foundation extension: the <code>/ai</code> command itself, the chat listener, token management tools, and dynamic custom tool loading.</p>
-          <span class="more"><a href="https://github.com/MCPaimon/extension-core" target="_blank" rel="noopener" style="color:inherit">Repository ↗</a></span>
-        </div>
         <div class="card">
           <h3>Template</h3>
           <p>A ready-made boilerplate for building your own extension, mirroring the structure used by every official extension.</p>
