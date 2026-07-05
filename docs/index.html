@@ -66,7 +66,7 @@
         </li>
         <li>
           <h3>Everything is stored centrally</h3>
-          <p>Platforms, models, accounts, sessions, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
+          <p>Platforms, models, accounts, sessions, saved player prompts, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
         </li>
       </ol>
     </section>
@@ -80,7 +80,7 @@
       <div class="grid">
         <div class="card">
           <h3>One route for the plugin</h3>
-          <p>The plugin speaks to the central server through the <code>/api/mcagents</code> route, which stores AI platforms, models, accounts, active sessions, and logs.</p>
+          <p>The plugin speaks to the central server through the <code>/api/mcagents</code> route, which stores AI platforms, models, accounts, active sessions, player prompts, and logs.</p>
         </div>
         <div class="card">
           <h3>Token-protected</h3>
@@ -142,6 +142,10 @@
         <div class="card">
           <h3>Tokens</h3>
           <p>Store, change, inspect, or remove the API token that authorizes you on a platform. Creating new platforms and models is reserved for operators.</p>
+        </div>
+        <div class="card">
+          <h3>Saved prompts</h3>
+          <p>Ask the agent to save a prompt once, then run it again by id whenever you like. Every player keeps their own prompts with their account, while the server's prompt file belongs to the console alone.</p>
         </div>
       </div>
     </section>
