@@ -147,6 +147,38 @@
           <h3>Saved prompts</h3>
           <p>Ask the agent to save a prompt once, then run it again by id whenever you like. Every player keeps their own prompts with their account, while the server's prompt file belongs to the console alone.</p>
         </div>
+        <div class="card">
+          <h3>Tool suggestions</h3>
+          <p>When you save a prompt, the agent can point out registered tools that fit it. Nothing is attached automatically — it only adds the tools you confirm.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Testing the agents</h2>
+      <p class="section-intro">
+        Operators can exercise the whole agent workflow without playing through it
+        by hand. The <code>/ai tester</code> command replays saved prompts and grades
+        the results, so commands, workflow logic, and tools stay reliable as the
+        plugin and its extensions grow.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>The <code>/ai tester</code> command</h3>
+          <p>Run every saved test for a plugin, or a single one by id. It is reserved for operators and the console because it spends a token and writes files.</p>
+        </div>
+        <div class="card">
+          <h3>A shared test registry</h3>
+          <p>Tests live in <code>tester.json</code>, grouped by plugin, so the main plugin and every extension keep their regression prompts in one place. Each test can pin the agent to a fixed set of tools or let it run the full workflow.</p>
+        </div>
+        <div class="card">
+          <h3>A dedicated tester account</h3>
+          <p>Tests always run against a separate tester account set in the plugin config — independent of any player or the console — so real sessions are never touched.</p>
+        </div>
+        <div class="card">
+          <h3>Markdown reports</h3>
+          <p>Each run writes a timestamped report recording the prompt, the agent's result, and an AI-written evaluation summary, so outcomes can be reviewed and compared over time.</p>
+        </div>
       </div>
     </section>
 
