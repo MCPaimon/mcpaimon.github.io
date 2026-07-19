@@ -14,7 +14,7 @@ The site is plain static HTML/CSS/JS with no build step. Pages explain how the e
 
 ## Design
 
-The visual style (white / silver / modern theme, components, and page transitions) is defined in [`DESIGN.md`](DESIGN.md). Read it before changing anything under `docs/`.
+The visual style (white / silver / modern theme, components, and page transitions) is the shared MCEngine theme, defined in `DESIGN.md` of `MCEngine/mcengine.github.io` — the single source of truth for the ecosystem — and imported over the network from `https://mcengine.github.io`. This repository keeps no `DESIGN.md` of its own; read mcengine's before changing anything visual under `docs/`.
 
 ## Contributing
 

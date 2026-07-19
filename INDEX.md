@@ -9,7 +9,6 @@ This file is the entry point for any agent working in this repository. Read it f
 | Path | Purpose |
 |---|---|
 | AGENTS.md | Primary agent instruction set (workflow, branching, commits, content rules). |
-| DESIGN.md | Design system: theme tokens, components, motion, and rules for changing the site. |
 | README.md | Project overview. |
 | INDEX.md | This file. |
 
@@ -23,7 +22,7 @@ This file is the entry point for any agent working in this repository. Read it f
 
 ## Shared Theme Assets
 
-The pages carry no local stylesheets or scripts. They import the shared MCEngine theme (white/silver/modern, defined by `DESIGN.md` in this repository, hosted by `MCEngine/mcengine.github.io`):
+The pages carry no local stylesheets or scripts. They import the shared MCEngine theme (white/silver/modern, defined by `DESIGN.md` in `MCEngine/mcengine.github.io` — the single source of truth — and hosted there):
 
 - `https://mcengine.github.io/styles/main/style.css` — tokens, components, page transitions.
 - `https://mcengine.github.io/scripts/main/script.js` — page transition controller.
