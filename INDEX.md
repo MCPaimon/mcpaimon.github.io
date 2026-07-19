@@ -9,6 +9,7 @@ This file is the entry point for any agent working in this repository. Read it f
 | Path | Purpose |
 |---|---|
 | AGENTS.md | Primary agent instruction set (workflow, branching, commits, content rules). |
+| DESIGN.md | Design system: theme tokens, components, motion, and rules for changing the site (a copy of the shared MCEngine "Silver Glass" system). |
 | README.md | Project overview. |
 | INDEX.md | This file. |
 
@@ -19,10 +20,14 @@ This file is the entry point for any agent working in this repository. Read it f
 | docs/index.html | `/` — how the MCAgents main plugin works. |
 | docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
 | docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
+| docs/styles/main/style.css | Vendored shared theme — tokens, components, page transitions. |
+| docs/scripts/main/script.js | Vendored page transition controller. |
 
-## Shared Theme Assets
+## Vendored Theme
 
-The pages carry no local stylesheets or scripts. They import the shared MCEngine theme (white/silver/modern, defined by `DESIGN.md` in `MCEngine/mcengine.github.io` — the single source of truth — and hosted there):
+The pages carry their own local copy of the shared MCEngine theme (white/silver/modern) — there is no runtime dependency on another repository. The design system is documented in this repository's `DESIGN.md`.
 
-- `https://mcengine.github.io/styles/main/style.css` — tokens, components, page transitions.
-- `https://mcengine.github.io/scripts/main/script.js` — page transition controller.
+- `docs/styles/main/style.css` — tokens, components, page transitions.
+- `docs/scripts/main/script.js` — page transition controller.
+
+Pages link these with relative paths (for example `styles/main/style.css` from the site root, `../styles/main/style.css` one level deep).
