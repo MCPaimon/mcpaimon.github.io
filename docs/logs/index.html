@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs — Release History | MCPaimon</title>
+  <meta name="description" content="The release history of the MCPaimon ecosystem: what changed in each version of the MCAgents plugin, why it changed, and what it means for server operators.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../styles/main/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../">MCAgents</a>
+        <a href="../playertools/">PlayerTools</a>
+        <a href="../servertools/">ServerTools</a>
+        <a href="./" aria-current="page">Logs</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Release History</span>
+      <h1>What changed, and<br><span class="metallic">why it changed</span></h1>
+      <p class="lead">
+        Every version of the MCAgents plugin, newest first. Each entry explains what
+        moved and what it means for a server operator, so upgrading is a decision you
+        can make from this page rather than from a diff.
+      </p>
+      <div class="platforms" aria-label="Supported platforms">
+        <span>PaperMC</span>
+        <span>SpigotMC</span>
+        <span>FoliaMC</span>
+      </div>
+    </div>
+
+    <section>
+      <h2>How versions work</h2>
+      <p class="section-intro">
+        Every module of the plugin shares one semantic version, so a single number
+        describes the whole build. The first number changes when something
+        incompatible changes, the second when a feature is added, and the third when
+        a fix lands. A version marked <span class="badge platform">In review</span>
+        is proposed and open for review; it is not on the default branch yet, so it
+        is not something to install.
+      </p>
+    </section>
+
+    <section>
+      <h2>3.1.0 <span class="badge platform">In review</span></h2>
+      <p class="section-intro">
+        One jar for every server. Until now, installing the plugin meant choosing the
+        download that matched your server software, and choosing wrong failed at
+        startup.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>A universal build</h3>
+          <p>A new build detects whether it is running on SpigotMC, PaperMC, or FoliaMC when the server starts, then installs the scheduling and extension behaviour that server needs. The same file works on all three.</p>
+        </div>
+        <div class="card">
+          <h3>The single-server builds remain</h3>
+          <p>The three per-platform downloads are still produced for anyone who prefers a smaller artifact aimed at one server. Nothing about them changes.</p>
+        </div>
+        <div class="card">
+          <h3>Adding a platform got cheaper</h3>
+          <p>What differs between servers is now one small object rather than a whole startup sequence, so supporting a new server means writing that object — not another copy of the plugin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3.0.0 <span class="badge platform">In review</span></h2>
+      <p class="section-intro">
+        A tidy-up of what the project publishes, and the end of a long-standing
+        duplication between the three server builds.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Only the libraries are published</h3>
+          <p>The four library pieces — the contracts, the tool interface, the data and workflow layer, and the shared server core — are what other projects depend on, so they are what gets published. The runnable server builds are downloads, not dependencies, and are no longer pushed to the package registry.</p>
+        </div>
+        <div class="card">
+          <h3>One startup sequence, not three</h3>
+          <p>Each server build carried its own copy of the same startup code, and the copies had already drifted apart. They now share one sequence and keep only what genuinely differs, which removes over five hundred lines of duplication.</p>
+        </div>
+        <div class="card">
+          <h3>MySQL became selectable</h3>
+          <p>A MySQL storage backend had been written but was never reachable from the configuration file. It can now be chosen like any other backend, and the shipped configuration documents it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2.0.0 <span class="badge platform">In review</span></h2>
+      <p class="section-intro">
+        A structural change: one clear way in, instead of several. Nothing an operator
+        configures changes, but anyone writing an extension against the plugin will
+        notice.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>A single entry point</h3>
+          <p>Storage and the AI workflow are reached through one class. Previously each server build assembled its own database connection and every AI call carried its own client, so the same responsibility lived in several places at once.</p>
+        </div>
+        <div class="card">
+          <h3>The boundary is enforced</h3>
+          <p>A test reads the server-side code and fails the build if anything reaches around that entry point. The rule is checked rather than remembered, so it holds as the project grows.</p>
+        </div>
+        <div class="card">
+          <h3>Documented in full</h3>
+          <p>Every class, field, and method across the four library pieces carries documentation, and every package explains what it is responsible for. The generated API documentation builds without a single warning.</p>
+        </div>
+        <div class="card">
+          <h3>For extension authors</h3>
+          <p>Calls that used to pass a client no longer take one, and the plugin is obtained through a factory rather than constructed directly. Both are small edits, and both are why this is a major version.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>1.0.0 <span class="badge everyone">Current</span></h2>
+      <p class="section-intro">
+        The first assembled release: the whole framework in one build, with the core
+        features that used to ship as a separate extension folded into the plugin.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Talking to an agent</h3>
+          <p>The <code>/ai</code> command in two modes — one-off questions, and a continued conversation that remembers the session. Players and the console both use it.</p>
+        </div>
+        <div class="card">
+          <h3>Tools with permissions</h3>
+          <p>Built-in tools for tokens, platforms, and models, each checking who is asking before it acts. Extensions register their own tools the same way.</p>
+        </div>
+        <div class="card">
+          <h3>A staged tool workflow</h3>
+          <p>Instead of sending every tool on every request, the agent narrows down by category, then by name, and only then receives full tool definitions — which keeps token spend low.</p>
+        </div>
+        <div class="card">
+          <h3>Choice of storage</h3>
+          <p>Data lives in a local file database by default, or in PostgreSQL, MongoDB, or the shared central server when several servers should see the same accounts and history.</p>
+        </div>
+        <div class="card">
+          <h3>Reusable prompts</h3>
+          <p>Prompts can be saved and re-run by id, either as server-wide entries or as a player's own, and can be pinned to a fixed set of tools.</p>
+        </div>
+        <div class="card">
+          <h3>Automated testing</h3>
+          <p>The <code>/ai tester</code> command replays saved prompts against a dedicated account and writes a report for each run, so the workflow can be checked without playing through it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        This page summarises releases in plain terms. The commit history, the review
+        discussion, and the code itself live in the repositories on
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>© 2026 MCPaimon</span>
+      <span>
+        <a href="../">MCAgents</a> ·
+        <a href="../playertools/">PlayerTools</a> ·
+        <a href="../servertools/">ServerTools</a> ·
+        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">Repository</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../scripts/main/script.js"></script>
+</body>
+</html>
