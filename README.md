@@ -9,7 +9,8 @@ The MCPaimon organization website, served by GitHub Pages from the [`docs/`](doc
 | `/` | The MCAgents main plugin: commands, sessions, tools, and the central API server. |
 | `/playertools/` | The PlayerTools extension: player information and administration tools. |
 | `/servertools/` | The ServerTools extension: server status and performance tools. |
-| `/logs/` | Release history: what changed in each version of the plugin, and why. |
+| `/logs/` | The latest release log. |
+| `/logs/{major}/{minor}/{patch}/` | Permalink for one released version. |
 
 The site is plain static HTML/CSS/JS with no build step. Pages explain how the ecosystem works and link to the repositories for code and setup; they never embed source code.
 
