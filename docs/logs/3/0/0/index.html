@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Log 3.0.0 — MCAgents | MCPaimon</title>
+  <meta name="description" content="Release notes for MCAgents version 3.0.0 — A smaller published surface.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../../styles/main/style.css">
+  <link rel="stylesheet" href="../../../../styles/logs/logs.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../../../../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../../../../">MCAgents</a>
+        <a href="../../../../playertools/">PlayerTools</a>
+        <a href="../../../../servertools/">ServerTools</a>
+        <a href="../../../" aria-current="page">Logs</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../../../../">MCAgents</a><span class="sep">/</span>
+      <a href="../../../">Change Logs</a><span class="sep">/</span><span>3.0.0</span>
+    </nav>
+
+    <section>
+      <span class="eyebrow">Release notes</span>
+      <h1>Change Log — 3.0.0</h1>
+      <p class="section-intro">Permalink for version 3.0.0.</p>
+    </section>
+
+    <div class="logs-layout">
+      <article class="log-entry">
+        <div class="log-entry__head">
+          <span class="log-entry__version">3.0.0</span>
+          <span class="log-entry__date">2026-08-03 &middot; A smaller published surface</span>
+        </div>
+        <p class="lead">A tidy-up of what the project publishes, and the end of a long-standing duplication between the three server builds.</p>
+
+        <div class="notice">
+          <strong>The three server builds are no longer published as libraries.</strong> <code>mcagents-spigotmc</code>, <code>mcagents-papermc</code>, and <code>mcagents-foliamc</code> are gone from the package registry. They were never meant to be depended on &mdash; they are downloads. Anything that listed one as a dependency should depend on <code>mcagents-bukkit</code> instead. Installing the plugin is unaffected.
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--improve">Changed</span> Only the libraries are published</h3>
+          <ul>
+            <li>The four library pieces &mdash; <code>mcagents-api</code>, <code>mcagents-tools</code>, <code>mcagents-common</code>, and <code>mcagents-bukkit</code> &mdash; are what other projects build against, so they are what gets published.</li>
+            <li>The runnable server builds are downloads rather than dependencies, and publishing them exposed their bundled internals as an artifact.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--improve">Changed</span> One startup sequence, not three</h3>
+          <ul>
+            <li>Each server build carried its own copy of the same startup code, and the copies had already drifted apart from one another.</li>
+            <li>They now share one sequence and keep only what genuinely differs, which removed over five hundred lines of duplication and the class of bug where a fix reaches one server but not the others.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> MySQL became selectable</h3>
+          <ul>
+            <li>A MySQL backend had been written but was never reachable from the configuration file.</li>
+            <li>Set <code>database.type</code> to <code>mysql</code> and fill in the <code>database.mysql</code> section, which the shipped <code>config.yml</code> now documents alongside the others.</li>
+            <li>MariaDB is accepted under the same setting.</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="logs-nav" aria-label="Log versions">
+        <h4>MCAgents</h4>
+        <ul>
+          <li><a href="../../../">3.1.0 <span class="latest">Latest</span></a></li>
+          <li><a class="is-current" href="../../../3/0/0/">3.0.0</a></li>
+          <li><a href="../../../2/0/0/">2.0.0</a></li>
+          <li><a href="../../../1/0/0/">1.0.0</a></li>
+        </ul>
+        <p class="back"><a href="../../../">&larr; Back to latest</a></p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>&copy; 2026 MCPaimon</span>
+      <span>
+        <a href="../../../../">MCAgents</a> &middot;
+        <a href="../../../../playertools/">PlayerTools</a> &middot;
+        <a href="../../../../servertools/">ServerTools</a> &middot;
+        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">Repository</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../../../../scripts/main/script.js"></script>
+</body>
+</html>
