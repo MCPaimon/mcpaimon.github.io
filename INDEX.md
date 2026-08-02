@@ -13,6 +13,7 @@ This file is the entry point for any agent working in this repository. Read it f
 | DESIGN.md | Design system: theme tokens, components, motion, and rules for changing the site (a copy of the shared MCEngine "Silver Glass" system). |
 | README.md | Project overview. |
 | INDEX.md | This file. |
+| VERSION | The site's own semantic version, bumped with every pull request. |
 
 ## Site Content (`docs/`, served by GitHub Pages)
 
@@ -21,6 +22,7 @@ This file is the entry point for any agent working in this repository. Read it f
 | docs/index.html | `/` — how the MCAgents main plugin works. |
 | docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
 | docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
+| docs/logs/index.html | `/logs/` — release history, newest first, explaining what changed in each plugin version. |
 | docs/styles/main/style.css | Vendored shared theme — tokens, components, page transitions. |
 | docs/scripts/main/script.js | Vendored page transition controller. |
 
