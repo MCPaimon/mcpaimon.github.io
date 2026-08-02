@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Logs section — page-specific layout only.
+
+   Adds the change-log entry and version-navigation layout on top of the
+   vendored theme. Everything here uses the theme's own design tokens
+   (styles/main/style.css); no colour, radius, or spacing value is hard-coded,
+   so the section inherits any future retheme. See DESIGN.md.
+   ========================================================================== */
+
+/* ---- Breadcrumbs ---- */
+.breadcrumbs {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-3);
+}
+
+.breadcrumbs a {
+  color: var(--color-muted);
+}
+
+.breadcrumbs .sep {
+  margin: 0 0.45rem;
+  color: var(--color-silver);
+}
+
+/* ---- Two column layout: entry + version nav ---- */
+.logs-layout {
+  display: grid;
+  grid-template-columns: 1fr 15rem;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+/* ---- One release entry ---- */
+.log-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: var(--space-2);
+}
+
+.log-entry__version {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.log-entry__date {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.log-section {
+  margin-top: var(--space-4);
+}
+
+.log-section h3 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.log-section ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--color-muted);
+}
+
+.log-section li + li {
+  margin-top: 0.4rem;
+}
+
+/* ---- Change tags: Added / Changed / Note ---- */
+.log-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.55rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.log-tag--new {
+  color: #234a32;
+  background: #e7f3ec;
+  border: 1px solid #cbe4d4;
+}
+
+.log-tag--improve {
+  color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.log-tag--note {
+  color: #5b4708;
+  background: #faf3dd;
+  border: 1px solid #eadfb8;
+}
+
+/* ---- Right side version navigation ---- */
+.logs-nav {
+  position: sticky;
+  top: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.logs-nav h4 {
+  margin: 0 0 var(--space-2);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.logs-nav h4 + ul {
+  margin-bottom: var(--space-3);
+}
+
+.logs-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.logs-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  color: var(--color-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.logs-nav a:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.logs-nav a.is-current {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.logs-nav .latest {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #234a32;
+  background: #e7f3ec;
+  border: 1px solid #cbe4d4;
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--radius-pill);
+}
+
+.logs-nav .back {
+  margin: var(--space-3) 0 0;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 54rem) {
+  .logs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .logs-nav {
+    position: static;
+    order: -1;
+  }
+}

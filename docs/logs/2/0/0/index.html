@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Log 2.0.0 — MCAgents | MCPaimon</title>
+  <meta name="description" content="Release notes for MCAgents version 2.0.0 — One way in.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../../styles/main/style.css">
+  <link rel="stylesheet" href="../../../../styles/logs/logs.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../../../../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../../../../">MCAgents</a>
+        <a href="../../../../playertools/">PlayerTools</a>
+        <a href="../../../../servertools/">ServerTools</a>
+        <a href="../../../" aria-current="page">Logs</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../../../../">MCAgents</a><span class="sep">/</span>
+      <a href="../../../">Change Logs</a><span class="sep">/</span><span>2.0.0</span>
+    </nav>
+
+    <section>
+      <span class="eyebrow">Release notes</span>
+      <h1>Change Log — 2.0.0</h1>
+      <p class="section-intro">Permalink for version 2.0.0.</p>
+    </section>
+
+    <div class="logs-layout">
+      <article class="log-entry">
+        <div class="log-entry__head">
+          <span class="log-entry__version">2.0.0</span>
+          <span class="log-entry__date">2026-08-03 &middot; One way in</span>
+        </div>
+        <p class="lead">A structural change. Nothing an operator configures is different, but anyone writing an extension against the plugin will need a small edit.</p>
+
+        <div class="notice">
+          <strong>Extension authors need to make two small changes.</strong> Calls that used to take a workflow client no longer accept one &mdash; drop the argument. The plugin is now obtained through <code>MCAgentsProvider.create(&hellip;)</code> rather than constructed directly. Both are mechanical edits, and both are why this is a major version.
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--improve">Changed</span> A single entry point</h3>
+          <ul>
+            <li>Storage and the AI workflow are reached through <code>MCAgentsProvider</code> and nothing else.</li>
+            <li>Each server build used to assemble its own database connection, and every AI call carried its own client, so one responsibility lived in several places at once.</li>
+            <li>Choosing a storage backend is unchanged &mdash; it is still the <code>database.type</code> setting.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> The boundary is checked, not just documented</h3>
+          <ul>
+            <li>A test reads the server-side code and fails the build if anything reaches around that entry point, so the rule holds as the project grows rather than depending on memory.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Documented in full</h3>
+          <ul>
+            <li>Every class, field, and method across the four library pieces carries documentation, and every package explains what it is responsible for.</li>
+            <li>The generated API documentation builds without a single warning, which makes it usable as a reference for extension authors.</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="logs-nav" aria-label="Log versions">
+        <h4>MCAgents</h4>
+        <ul>
+          <li><a href="../../../">3.1.0 <span class="latest">Latest</span></a></li>
+          <li><a href="../../../3/0/0/">3.0.0</a></li>
+          <li><a class="is-current" href="../../../2/0/0/">2.0.0</a></li>
+          <li><a href="../../../1/0/0/">1.0.0</a></li>
+        </ul>
+        <p class="back"><a href="../../../">&larr; Back to latest</a></p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>&copy; 2026 MCPaimon</span>
+      <span>
+        <a href="../../../../">MCAgents</a> &middot;
+        <a href="../../../../playertools/">PlayerTools</a> &middot;
+        <a href="../../../../servertools/">ServerTools</a> &middot;
+        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">Repository</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../../../../scripts/main/script.js"></script>
+</body>
+</html>

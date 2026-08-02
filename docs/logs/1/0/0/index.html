@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Log 1.0.0 — MCAgents | MCPaimon</title>
+  <meta name="description" content="Release notes for MCAgents version 1.0.0 — The first assembled release.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../../styles/main/style.css">
+  <link rel="stylesheet" href="../../../../styles/logs/logs.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../../../../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../../../../">MCAgents</a>
+        <a href="../../../../playertools/">PlayerTools</a>
+        <a href="../../../../servertools/">ServerTools</a>
+        <a href="../../../" aria-current="page">Logs</a>
+        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../../../../">MCAgents</a><span class="sep">/</span>
+      <a href="../../../">Change Logs</a><span class="sep">/</span><span>1.0.0</span>
+    </nav>
+
+    <section>
+      <span class="eyebrow">Release notes</span>
+      <h1>Change Log — 1.0.0</h1>
+      <p class="section-intro">Permalink for version 1.0.0.</p>
+    </section>
+
+    <div class="logs-layout">
+      <article class="log-entry">
+        <div class="log-entry__head">
+          <span class="log-entry__version">1.0.0</span>
+          <span class="log-entry__date">2026-07-07 &middot; The first assembled release</span>
+        </div>
+        <p class="lead">The whole framework in one build, with the core features that used to ship as a separate extension folded into the plugin.</p>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Talking to an agent</h3>
+          <ul>
+            <li>The <code>/ai</code> command in two modes: one-off questions, and a continued conversation that remembers the session.</li>
+            <li>Players and the console both use it, and a response countdown keeps a single player from queueing up overlapping requests.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Tools that respect permissions</h3>
+          <ul>
+            <li>Built-in tools for tokens, platforms, and models, each checking who is asking before it acts.</li>
+            <li>Extensions register their own tools the same way, so a tool from an extension is held to the same checks.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> A staged tool workflow</h3>
+          <ul>
+            <li>Rather than sending every tool on every request, the agent narrows down by category, then by name, and only then receives full tool definitions.</li>
+            <li>Prompt caching is used where the AI platform supports it. Both keep token spend down.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Choice of storage</h3>
+          <ul>
+            <li>A local file database by default, or PostgreSQL, MongoDB, or the shared central server when several servers should see the same accounts and history.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Reusable prompts and automated testing</h3>
+          <ul>
+            <li>Prompts can be saved and re-run by id, either server-wide or as a player's own, and can be pinned to a fixed set of tools.</li>
+            <li>The <code>/ai tester</code> command replays saved prompts against a dedicated account and writes a report for each run.</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="logs-nav" aria-label="Log versions">
+        <h4>MCAgents</h4>
+        <ul>
+          <li><a href="../../../">3.1.0 <span class="latest">Latest</span></a></li>
+          <li><a href="../../../3/0/0/">3.0.0</a></li>
+          <li><a href="../../../2/0/0/">2.0.0</a></li>
+          <li><a class="is-current" href="../../../1/0/0/">1.0.0</a></li>
+        </ul>
+        <p class="back"><a href="../../../">&larr; Back to latest</a></p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>&copy; 2026 MCPaimon</span>
+      <span>
+        <a href="../../../../">MCAgents</a> &middot;
+        <a href="../../../../playertools/">PlayerTools</a> &middot;
+        <a href="../../../../servertools/">ServerTools</a> &middot;
+        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">Repository</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../../../../scripts/main/script.js"></script>
+</body>
+</html>

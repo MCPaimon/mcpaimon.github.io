@@ -22,9 +22,18 @@ This file is the entry point for any agent working in this repository. Read it f
 | docs/index.html | `/` — how the MCAgents main plugin works. |
 | docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
 | docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
-| docs/logs/index.html | `/logs/` — release history, newest first, explaining what changed in each plugin version. |
+| docs/logs/index.html | `/logs/` — the latest release log; mirrors the newest versioned page. |
+| docs/logs/{major}/{minor}/{patch}/index.html | Permalink for one released version (`1/0/0`, `2/0/0`, `3/0/0`, `3/1/0`). |
+| docs/styles/logs/logs.css | Per-section styles for the log entry and version list. |
 | docs/styles/main/style.css | Vendored shared theme — tokens, components, page transitions. |
 | docs/scripts/main/script.js | Vendored page transition controller. |
+
+## Change Logs
+
+Logs use a versioned directory structure so every released build has a permanent
+URL: `docs/logs/{major}/{minor}/{patch}/index.html`. `docs/logs/index.html`
+always mirrors the latest release. The procedure for publishing a new one is in
+[`.agents/architecture/website.md`](.agents/architecture/website.md).
 
 ## Vendored Theme
 
