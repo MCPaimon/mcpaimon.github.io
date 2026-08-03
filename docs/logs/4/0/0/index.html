@@ -42,7 +42,7 @@
           <span class="badge everyone">Latest</span>
           <span class="log-entry__date">2026-08-03 &middot; The extension loader is gone</span>
         </div>
-        <p class="lead">MCAgents no longer bundles the MCExtension loader. The plugin now carries nothing platform specific at all, which makes it simpler to install and simpler to build &mdash; but it changes how add-ons reach it.</p>
+        <p class="lead">MCAgents no longer bundles the MCExtension loader. That is the whole of this release &mdash; nothing else about the plugin changed.</p>
 
         <div class="notice">
           <strong>Add-ons loaded by MCExtension will stop loading.</strong> The <code>/mcaiextension</code> command is gone and the plugin no longer loads extension jars itself. An add-on that relied on it has to run as an ordinary server plugin and register its tools through the plugin's own API instead. If you run PlayerTools or ServerTools, check for an updated release before upgrading.
@@ -53,14 +53,7 @@
           <ul>
             <li>The bundled loader, its command, and its <code>mcaiextension.admin</code> permission are all gone. Nothing in the plugin loads other jars any more.</li>
             <li>Add-ons still extend the agent the same way once they are running &mdash; they register tools through the plugin's API, which is unchanged. Only the mechanism that started them has been removed.</li>
-          </ul>
-        </div>
-
-        <div class="log-section">
-          <h3><span class="log-tag log-tag--improve">Changed</span> One plugin class for every server</h3>
-          <ul>
-            <li>The loader was the only part of the plugin that needed to know which server it was running on. With it gone, nothing is platform specific: the plugin stays on the common server API and does its background work on its own threads rather than a server scheduler.</li>
-            <li>The universal jar therefore no longer detects anything at startup &mdash; it is simply correct everywhere. The per-server downloads remain, and now carry identical code, differing only in the descriptor inside them.</li>
+            <li>Building from source no longer needs credentials for a private package registry, so a fresh checkout builds on its own.</li>
           </ul>
         </div>
 
@@ -68,7 +61,7 @@
           <h3><span class="log-tag log-tag--note">Note</span> Nothing else changed</h3>
           <ul>
             <li>Commands, agents, tools, prompts, testing, and every storage backend behave exactly as they did in 3.1.0. There is no configuration change and nothing to migrate.</li>
-            <li>Building from source no longer needs credentials for a private package registry, so a fresh checkout builds on its own.</li>
+            <li>The downloads are unchanged too: the universal <code>MCAgents</code> jar still detects your server at startup, and the three per-server builds are still published alongside it.</li>
           </ul>
         </div>
       </article>
