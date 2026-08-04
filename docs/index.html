@@ -45,8 +45,8 @@
     <section>
       <h2>How it works</h2>
       <p class="section-intro">
-        The plugin sits between your players and the AI platform of your choice.
-        Every conversation flows through the same five stages.
+        The plugin sits between your players and OpenRouter, the AI provider it
+        talks to. Every conversation flows through the same five stages.
       </p>
       <ol class="steps">
         <li>
@@ -55,19 +55,19 @@
         </li>
         <li>
           <h3>The plugin resolves the session</h3>
-          <p>Each player has an active session: the AI platform and model they selected, plus the token that authorizes them. Operators register platforms and models once; players pick from them.</p>
+          <p>Each player has an active session: the model they selected and the OpenRouter key that authorizes them. Operators list the models the server offers; players pick one, or fall back to the server default. The console and the test runner read their own model and key from the plugin configuration on every prompt.</p>
         </li>
         <li>
           <h3>The agent thinks and calls tools</h3>
           <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the plugin's built-in tools or the tools that extensions have registered — always inside the permission rules of the tool.</p>
         </li>
         <li>
-          <h3>Tools respect Minecraft permissions</h3>
-          <p>Every tool checks who is asking. Regular players can only query themselves, while operator-only tools verify OP status in code before doing anything.</p>
+          <h3>Commands and tools respect Minecraft permissions</h3>
+          <p>Every subcommand has its own permission node, so a server decides exactly who may ask, chat, save prompts, or run the test suite. Tools check who is asking too: regular players can only query themselves, while administrative tools verify operator status before doing anything.</p>
         </li>
         <li>
           <h3>Everything is stored centrally</h3>
-          <p>Platforms, models, accounts, sessions, saved player prompts, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
+          <p>Models, accounts, sessions, saved player prompts, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
         </li>
       </ol>
     </section>
@@ -81,7 +81,7 @@
       <div class="grid">
         <div class="card">
           <h3>One route for the plugin</h3>
-          <p>The plugin speaks to the central server through the <code>/api/mcagents</code> route, which stores AI platforms, models, accounts, active sessions, player prompts, and logs.</p>
+          <p>The plugin speaks to the central server through the <code>/api/mcagents</code> route, which stores models, accounts, active sessions, player prompts, and logs.</p>
         </div>
         <div class="card">
           <h3>Token-protected</h3>
@@ -89,7 +89,7 @@
         </div>
         <div class="card">
           <h3>Shared across servers</h3>
-          <p>Because storage is centralized, players keep their platforms, sessions, and history when they hop between the Minecraft servers of a network.</p>
+          <p>Because storage is centralized, players keep their sessions and history when they hop between the Minecraft servers of a network.</p>
         </div>
       </div>
     </section>
@@ -137,12 +137,12 @@
           <p>Toggle a personal conversation mode where your chat messages go to the agent until you leave the session.</p>
         </div>
         <div class="card">
-          <h3>Active platform &amp; model</h3>
-          <p>Choose which registered AI platform and which of its models your session should use.</p>
+          <h3>Active model</h3>
+          <p>Choose which of the server's OpenRouter models your session should use. Skip it and your prompts run on the server default.</p>
         </div>
         <div class="card">
           <h3>Tokens</h3>
-          <p>Store, change, inspect, or remove the API token that authorizes you on a platform. Creating new platforms and models is reserved for operators.</p>
+          <p>Store, change, inspect, or remove your own OpenRouter key. Registering new models for everyone is reserved for operators.</p>
         </div>
         <div class="card">
           <h3>Saved prompts</h3>
@@ -174,11 +174,38 @@
         </div>
         <div class="card">
           <h3>A dedicated tester account</h3>
-          <p>Tests always run against a separate tester account set in the plugin config — independent of any player or the console — so real sessions are never touched.</p>
+          <p>Tests always run on a separate model and key set in the plugin config — independent of any player or the console — so real sessions are never touched.</p>
         </div>
         <div class="card">
           <h3>Markdown reports</h3>
           <p>Each run writes a timestamped report recording the prompt, the agent's result, and an AI-written evaluation summary, so outcomes can be reviewed and compared over time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who may do what</h2>
+      <p class="section-intro">
+        Every <code>/ai</code> subcommand carries its own permission node under the
+        <code>mcpaimon.mcagents.</code> prefix, so access is set per command rather
+        than by operator status alone.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Open to players by default</h3>
+          <p>Asking, chat mode, saved prompts, choosing a model, and storing a key are allowed out of the box, because a prompt spends the player's own OpenRouter key.</p>
+        </div>
+        <div class="card">
+          <h3>Operators by default</h3>
+          <p>Reloading the server prompt file and running the test suite are restricted, because they touch shared state and spend the server's own key.</p>
+        </div>
+        <div class="card">
+          <h3>Tune it per role</h3>
+          <p>Any node can be granted or withheld with your usual permission manager — hand the test suite to a moderator, or keep prompt saving out of a guest world.</p>
+        </div>
+        <div class="card">
+          <h3>Hidden, not just blocked</h3>
+          <p>The help menu and tab completion show only the subcommands you actually hold, so a withheld command never appears as a dead end.</p>
         </div>
       </div>
     </section>
