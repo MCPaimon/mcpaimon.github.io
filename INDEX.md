@@ -23,7 +23,7 @@ This file is the entry point for any agent working in this repository. Read it f
 | docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
 | docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
 | docs/logs/index.html | `/logs/` — the latest release log; mirrors the newest versioned page. |
-| docs/logs/{major}/{minor}/{patch}/index.html | Permalink for one released version (`1/0/0`, `2/0/0`, `3/0/0`, `3/1/0`, `4/0/0`). |
+| docs/logs/{major}/{minor}/{patch}/index.html | Permalink for one released version (`1/0/0`, `2/0/0`, `3/0/0`, `3/1/0`, `4/0/0`, `5/0/0`). |
 | docs/styles/logs/logs.css | Per-section styles for the log entry and version list. |
 | docs/styles/main/style.css | Vendored shared theme — tokens, components, page transitions. |
 | docs/scripts/main/script.js | Vendored page transition controller. |
