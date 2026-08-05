@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Log 0.0.0 — MCAgentsNPC | MCPaimon</title>
+  <meta name="description" content="Release notes for MCAgentsNPC version 0.0.0 — the first release of the AI driven NPC plugin, with six behaviours, short-term memory, and an optional MCAgents integration.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../../../styles/main/style.css">
+  <link rel="stylesheet" href="../../../../../styles/logs/logs.css">
+</head>
+<body data-page="logs" data-root="../../../../../">
+  <header class="site-header" data-site-header></header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../../../../../npc/">MCAgentsNPC</a><span class="sep">/</span>
+      <a href="../../../">Change Logs</a><span class="sep">/</span><span>0.0.0</span>
+    </nav>
+
+    <section>
+      <span class="eyebrow">Release notes</span>
+      <h1>Change Log — 0.0.0</h1>
+      <p class="section-intro">Permalink for MCAgentsNPC version 0.0.0.</p>
+    </section>
+
+    <div class="logs-layout">
+      <article class="log-entry">
+        <div class="log-entry__head">
+          <span class="log-entry__version">0.0.0</span>
+          <span class="badge everyone">Latest</span>
+          <span class="log-entry__date">2026-08-05 &middot; NPCs that understand what you ask for</span>
+        </div>
+        <p class="lead">The first release of MCAgentsNPC, a new plugin in the MCPaimon family. It puts NPCs on your server that gather, farm, fight, keep watch, and follow you — and that take their instructions in plain language rather than from a menu.</p>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> NPCs with six behaviours</h3>
+          <ul>
+            <li>Spawn an NPC where you stand, name it, and give it one of six jobs: gathering, farming, fighting, observing, following, or standing by.</li>
+            <li>A gathering NPC breaks only the blocks an operator has listed and keeps what they drop, so nothing you did not permit is ever dug up and nothing ends up scattered on the floor.</li>
+            <li>A farming NPC harvests ripe crops and replants them. The field it works stays a field &mdash; it never leaves you with cleared ground.</li>
+            <li>A fighting NPC attacks hostile mobs only. Players, animals, and villagers are never targets, and that is fixed in the behaviour rather than left as a setting.</li>
+            <li>An observing NPC changes nothing and reports only when what it can see has changed, so a lookout is useful without becoming noise.</li>
+            <li>Each player may keep three NPCs by default, and they are removed when their owner logs out.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Instructions in your own words</h3>
+          <ul>
+            <li>Describe what you want &mdash; "there is iron in the cave below, go get it" &mdash; and the agent picks the behaviour that fits and answers in one line.</li>
+            <li>Before asking anything, the NPC reports what it can actually see: who is nearby, what creatures are around, what it is standing on, and whether it is day or night. The answer is about your situation rather than a generic one.</li>
+            <li>A question that is not an order is answered without interrupting whatever the NPC was doing.</li>
+            <li>Naming a behaviour directly still works, costs nothing, and needs no AI at all.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Short-term memory that forgets on purpose</h3>
+          <ul>
+            <li>An NPC remembers your conversation, so your next message can be a follow-up: "keep at it until you have enough" works.</li>
+            <li>What it keeps is a summary of each exchange, never the words you typed. Remembered turns are replayed into every later request, so anything stored word-for-word would be paid for again on every message that followed it.</li>
+            <li>Five minutes without a new task and the conversation is dropped whole. The window is configurable, and asking to see the memory does not extend it &mdash; only a new instruction does.</li>
+            <li>Nothing is written to disk or to a database. Short-term context lives in memory for as long as the server runs, and a restart forgets all of it.</li>
+            <li>A command shows exactly what an NPC is about to replay, and another clears it. Memory that summarises and then deletes itself is hard to trust without a way to look at it.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> An optional MCAgents integration</h3>
+          <ul>
+            <li>MCAgentsNPC is a standalone plugin, not an extension. It installs and runs on its own.</li>
+            <li>When MCAgents is installed alongside it, MCAgentsNPC finds it on the running server and binds to it there rather than being built against it. That is why it loads cleanly on a server without MCAgents, and on one whose MCAgents is a different version.</li>
+            <li>If the binding fails, the <em>integration</em> switches off, not the plugin. One clear line goes to the log, NPCs still spawn, and every behaviour still runs &mdash; you set them by name instead of by sentence.</li>
+            <li>The plugin holds no API key of its own. Every request is made by MCAgents on the asking account's key, so a player's instruction spends that player's key exactly as a direct question to MCAgents would.</li>
+            <li>It works the other way too: two tools are handed to MCAgents so a player already talking to an agent can list and retask their NPCs without touching the NPC command. Both are limited to that player's own NPCs.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> One command, one node per action</h3>
+          <ul>
+            <li>Spawning, removing, listing, setting a behaviour, giving a task, collecting what was gathered, inspecting memory, and reloading each carry their own permission node.</li>
+            <li>Everything defaults to being open to players, because there is nothing shared to protect: a task spends the player's own key. Only reloading is restricted to operators, since it removes every NPC on the server.</li>
+            <li>Ownership is separate from permission: a player may command their own NPCs and nobody else's, whatever nodes they hold, while operators may command any.</li>
+            <li>The help menu and tab completion list only the subcommands you actually hold, so a withheld command never appears as a dead end.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--note">Note</span> What to expect from an NPC</h3>
+          <ul>
+            <li>NPCs move by stepping towards a goal rather than by pathfinding. One climbs a single block and drops a few, and gives up on anything it cannot reach that way. Excellent in a field, a quarry, or a cleared cave; poor in a maze.</li>
+            <li>An NPC that strays too far from where its behaviour started walks back, so it works the area you pointed it at instead of drifting across the map.</li>
+            <li>Player damage to an NPC is cancelled &mdash; they cannot defend themselves against you, and a misclick would cost you the helper and everything it carried. Creepers, falls, and lava still count, and an NPC that dies drops what it was carrying.</li>
+            <li>The plugin ships disabled. Dropping the jar into a server changes nothing until an operator sets <code>enable: true</code> and restarts.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--note">Note</span> Installing</h3>
+          <ul>
+            <li>The universal <code>MCAgentsNPC</code> jar detects whether it is running on PaperMC, SpigotMC, or Folia at startup and installs the matching scheduling support, so one file works on any of them.</li>
+            <li>Three per-server builds are published alongside it for anyone who wants a smaller artifact targeted at one platform.</li>
+            <li>There is no database to set up and no key to register. The plugin stores nothing.</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="logs-nav" aria-label="Log versions" data-logs-nav data-current="MCAgentsNPC:0.0.0" data-back="logs/npc/"></aside>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="../../../../../scripts/main/chrome.js"></script>
+  <script src="../../../../../scripts/logs/logs-nav.js"></script>
+  <script src="../../../../../scripts/main/script.js"></script>
+</body>
+</html>
