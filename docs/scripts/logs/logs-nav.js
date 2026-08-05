@@ -59,6 +59,7 @@
       product: "MCAgentsNPC",
       index: "logs/npc/",
       versions: [
+        { version: "0.0.1", href: "logs/npc/0/0/1/" },
         { version: "0.0.0", href: "logs/npc/0/0/0/" }
       ]
     }
