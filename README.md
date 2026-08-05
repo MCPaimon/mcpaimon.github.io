@@ -7,12 +7,20 @@ The MCPaimon organization website, served by GitHub Pages from the [`docs/`](doc
 | Route | Explains |
 |---|---|
 | `/` | The MCAgents main plugin: commands, sessions, tools, and the central API server. |
+| `/npc/` | The MCAgentsNPC plugin: AI driven NPCs, what they do, and what they remember. |
 | `/playertools/` | The PlayerTools extension: player information and administration tools. |
 | `/servertools/` | The ServerTools extension: server status and performance tools. |
-| `/logs/` | The latest release log. |
-| `/logs/{major}/{minor}/{patch}/` | Permalink for one released version. |
+| `/logs/` | The latest MCAgents release log. |
+| `/logs/{major}/{minor}/{patch}/` | Permalink for one released MCAgents version. |
+| `/logs/npc/` | The latest MCAgentsNPC release log. |
+| `/logs/npc/{major}/{minor}/{patch}/` | Permalink for one released MCAgentsNPC version. |
 
 The site is plain static HTML/CSS/JS with no build step. Pages explain how the ecosystem works and link to the repositories for code and setup; they never embed source code.
+
+The header, the footer, and the release-log picker are rendered from a single
+file each rather than copied into every page, so adding a section or publishing
+a release is one edit instead of one per page. See
+[`INDEX.md`](INDEX.md) for where those files live.
 
 ## Design
 

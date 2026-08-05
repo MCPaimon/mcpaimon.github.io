@@ -132,6 +132,23 @@
   padding: 0;
   display: grid;
   gap: 0.2rem;
+
+  /* One row: the link's line box plus its own vertical padding. */
+  --logs-nav-row: 2.52rem;
+  --logs-nav-gap: 0.2rem;
+}
+
+/*
+ * Past five releases the list scrolls instead of growing, so the picker stays
+ * the same height however long a product's history gets. The class is applied
+ * by scripts/logs/logs-nav.js only when there is more to see than fits.
+ */
+.logs-nav ul.is-scrollable {
+  max-height: calc(5 * var(--logs-nav-row) + 4 * var(--logs-nav-gap));
+  overflow-y: auto;
+  /* Keep the scrollbar off the entries rather than over them. */
+  padding-right: 0.3rem;
+  scrollbar-width: thin;
 }
 
 .logs-nav a {

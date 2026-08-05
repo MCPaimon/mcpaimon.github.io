@@ -8,19 +8,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../styles/main/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="inner">
-      <a class="brand" href="../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="../">MCAgents</a>
-        <a href="./" aria-current="page">PlayerTools</a>
-        <a href="../servertools/">ServerTools</a>
-        <a href="../logs/">Logs</a>
-        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
+<body data-page="playertools" data-root="../">
+  <header class="site-header" data-site-header></header>
 
   <main>
     <div class="hero">
@@ -139,18 +128,9 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="inner">
-      <span>© 2026 MCPaimon</span>
-      <span>
-        <a href="../">MCAgents</a> ·
-        <a href="../servertools/">ServerTools</a> ·
-        <a href="../logs/">Logs</a> ·
-        <a href="https://github.com/MCPaimon/extension-playertools" target="_blank" rel="noopener">Repository</a>
-      </span>
-    </div>
-  </footer>
+  <footer class="site-footer" data-site-footer></footer>
 
+  <script src="../scripts/main/chrome.js"></script>
   <script src="../scripts/main/script.js"></script>
 </body>
 </html>
