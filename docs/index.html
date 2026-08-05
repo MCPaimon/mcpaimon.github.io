@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCAgents — AI Agents for Minecraft Servers | MCPaimon</title>
-  <meta name="description" content="MCAgents is the MCPaimon plugin that brings AI agents into Minecraft servers on PaperMC, SpigotMC, and FoliaMC. Learn how the plugin, its extensions, and the central API server work together.">
+  <meta name="description" content="MCAgents is the MCPaimon plugin that brings AI agents into Minecraft servers on PaperMC, SpigotMC, and FoliaMC. Learn how the plugin, its tools, and the central API server work together.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles/main/style.css">
 </head>
@@ -22,7 +22,7 @@
       </p>
       <div class="actions">
         <a class="button primary" href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">View on GitHub</a>
-        <a class="button ghost" href="playertools/">Explore extensions</a>
+        <a class="button ghost" href="npc/">Meet MCAgentsNPC</a>
       </div>
       <div class="platforms" aria-label="Supported platforms">
         <span>PaperMC</span>
@@ -48,7 +48,7 @@
         </li>
         <li>
           <h3>The agent thinks and calls tools</h3>
-          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the plugin's built-in tools or the tools that extensions have registered — always inside the permission rules of the tool.</p>
+          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the plugin's built-in tools or the tools that other plugins have registered — always inside the permission rules of the tool.</p>
         </li>
         <li>
           <h3>Commands and tools respect Minecraft permissions</h3>
@@ -110,29 +110,25 @@
     </section>
 
     <section>
-      <h2>Extensions</h2>
+      <h2>Extending the agent</h2>
       <p class="section-intro">
         The essentials ship inside the plugin itself: the <code>/ai</code> command,
         the chat listener, token management tools, and dynamic custom tool loading.
-        Extensions build on that core — they only add tools, commands, and listeners
-        to MCAgents and never need their own route on the central server. All
-        extensions run on PaperMC, SpigotMC, and FoliaMC.
+        Anything beyond that is added from outside — by your own scripts, or by
+        another plugin that registers tools of its own.
       </p>
       <div class="grid">
-        <a class="card" href="playertools/">
-          <h3>PlayerTools</h3>
-          <p>Player information and administration: identity, health, food, bans, IP checks, and operator audits — all permission-aware.</p>
-          <span class="more">How PlayerTools works →</span>
-        </a>
-        <a class="card" href="servertools/">
-          <h3>ServerTools</h3>
-          <p>Server health at a glance: tick rate, player latency, address details, and the installed plugin list for operators.</p>
-          <span class="more">How ServerTools works →</span>
-        </a>
         <div class="card">
-          <h3>Template</h3>
-          <p>A ready-made boilerplate for building your own extension, mirroring the structure used by every official extension.</p>
-          <span class="more"><a href="https://github.com/MCPaimon/extension-template" target="_blank" rel="noopener" style="color:inherit">Repository ↗</a></span>
+          <h3>Your own scripts as tools</h3>
+          <p>Point the plugin at a script and describe it in Markdown, and the agent can call it like any built-in tool — no Java, no rebuild.</p>
+        </div>
+        <div class="card">
+          <h3>Tools from another plugin</h3>
+          <p>Any server plugin can register its own tools, categories, and saved prompts with MCAgents at startup, and they join the same permission-aware workflow.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing extra on the server</h3>
+          <p>Added tools store their data through MCAgents itself, so they never need a route of their own on the central API server.</p>
         </div>
       </div>
     </section>
