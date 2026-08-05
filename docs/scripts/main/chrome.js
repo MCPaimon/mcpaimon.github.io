@@ -27,8 +27,6 @@
   var NAV = [
     { id: "mcagents", label: "MCAgents", href: "" },
     { id: "npc", label: "MCAgentsNPC", href: "npc/" },
-    { id: "playertools", label: "PlayerTools", href: "playertools/" },
-    { id: "servertools", label: "ServerTools", href: "servertools/" },
     { id: "logs", label: "Logs", href: "logs/" },
     { id: "github", label: "GitHub", href: "https://github.com/MCPaimon", external: true }
   ];
@@ -37,8 +35,6 @@
   var FOOTER = [
     { label: "MCAgents", href: "https://github.com/MCPaimon/mcagents", external: true },
     { label: "MCAgentsNPC", href: "https://github.com/MCPaimon/mcagents-npc", external: true },
-    { label: "PlayerTools", href: "https://github.com/MCPaimon/extension-playertools", external: true },
-    { label: "ServerTools", href: "https://github.com/MCPaimon/extension-servertools", external: true },
     { label: "Logs", href: "logs/" },
     { label: "Central Server", href: "https://github.com/MCEngine/server-expressjs", external: true }
   ];
