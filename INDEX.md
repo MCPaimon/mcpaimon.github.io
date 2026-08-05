@@ -27,7 +27,7 @@ This file is the entry point for any agent working in this repository. Read it f
 | docs/logs/chat/index.html | `/logs/chat/` — the latest MCAgentsChat release log. |
 | docs/logs/chat/{major}/{minor}/{patch}/index.html | Permalink for one released MCAgentsChat version (`0/0/0`). |
 | docs/logs/npc/index.html | `/logs/npc/` — the latest MCAgentsNPC release log. |
-| docs/logs/npc/{major}/{minor}/{patch}/index.html | Permalink for one released MCAgentsNPC version (`0/0/0`). |
+| docs/logs/npc/{major}/{minor}/{patch}/index.html | Permalink for one released MCAgentsNPC version (`0/0/0`, `0/0/1`). |
 | docs/styles/logs/logs.css | Per-section styles for the log entry and the version picker. |
 | docs/styles/main/style.css | Vendored shared theme — tokens, components, page transitions. |
 | docs/scripts/main/chrome.js | Renders the shared site header and footer into every page. |
