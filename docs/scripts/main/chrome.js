@@ -26,6 +26,7 @@
   /* The main navigation, in the order it is shown. */
   var NAV = [
     { id: "mcagents", label: "MCAgents", href: "" },
+    { id: "chat", label: "MCAgentsChat", href: "chat/" },
     { id: "npc", label: "MCAgentsNPC", href: "npc/" },
     { id: "logs", label: "Logs", href: "logs/" },
     { id: "github", label: "GitHub", href: "https://github.com/MCPaimon", external: true }
@@ -34,6 +35,7 @@
   /* The footer links, in the order they are shown. */
   var FOOTER = [
     { label: "MCAgents", href: "https://github.com/MCPaimon/mcagents", external: true },
+    { label: "MCAgentsChat", href: "https://github.com/MCPaimon/mcagents-chat", external: true },
     { label: "MCAgentsNPC", href: "https://github.com/MCPaimon/mcagents-npc", external: true },
     { label: "Logs", href: "logs/" },
     { label: "Central Server", href: "https://github.com/MCEngine/server-expressjs", external: true }

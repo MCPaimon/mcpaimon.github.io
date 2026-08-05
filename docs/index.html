@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MCAgents — AI Agents for Minecraft Servers | MCPaimon</title>
-  <meta name="description" content="MCAgents is the MCPaimon plugin that brings AI agents into Minecraft servers on PaperMC, SpigotMC, and FoliaMC. Learn how the plugin, its tools, and the central API server work together.">
+  <title>MCAgents — The AI Core for Minecraft Servers | MCPaimon</title>
+  <meta name="description" content="MCAgents is the MCPaimon core plugin that gives a Minecraft server one way to reach an AI provider, one registry of permission-aware tools, and one place its API keys live. MCAgentsChat and MCAgentsNPC are built on it.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles/main/style.css">
 </head>
@@ -13,16 +13,16 @@
 
   <main>
     <div class="hero">
-      <span class="eyebrow">Main Plugin</span>
-      <h1>Bring <span class="metallic">AI agents</span> into your<br>Minecraft server</h1>
+      <span class="eyebrow">Core Plugin</span>
+      <h1>The <span class="metallic">AI core</span> your<br>Minecraft server builds on</h1>
       <p class="lead">
-        MCAgents is the MCPaimon main plugin. It lets players and operators talk to AI
-        agents in game, and it gives those agents safe, permission-aware tools to read
-        and manage the server.
+        MCAgents is the MCPaimon core plugin. It gives a server one way to reach an AI
+        provider, one registry of safe, permission-aware tools, and one place API keys
+        live — then hands all of that to the plugins built on top of it.
       </p>
       <div class="actions">
         <a class="button primary" href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">View on GitHub</a>
-        <a class="button ghost" href="npc/">Meet MCAgentsNPC</a>
+        <a class="button ghost" href="chat/">Meet MCAgentsChat</a>
       </div>
       <div class="platforms" aria-label="Supported platforms">
         <span>PaperMC</span>
@@ -32,31 +32,55 @@
     </div>
 
     <section>
-      <h2>How it works</h2>
+      <h2>A core, and the plugins on it</h2>
       <p class="section-intro">
-        The plugin sits between your players and OpenRouter, the AI provider it
-        talks to. Every conversation flows through the same five stages.
+        MCAgents does not talk to players. It is the layer everything else asks,
+        so a server runs one AI setup no matter how many plugins use it.
+      </p>
+      <div class="grid">
+        <a class="card" href="chat/">
+          <h3>MCAgentsChat</h3>
+          <p>The chatting interface. One command opens a conversation with an agent, and every tool registered here is available while you talk.</p>
+          <span class="more">How MCAgentsChat works &rarr;</span>
+        </a>
+        <a class="card" href="npc/">
+          <h3>MCAgentsNPC</h3>
+          <p>AI driven NPCs that gather, farm, fight, keep watch, and follow you, and take their instructions in plain language.</p>
+          <span class="more">How MCAgentsNPC works &rarr;</span>
+        </a>
+        <div class="card">
+          <h3>Your own plugin</h3>
+          <p>Anything that registers a tool, or sends a prompt of its own, is built the same way — on this plugin's public interface, with no route of its own on the central server.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What the core does</h2>
+      <p class="section-intro">
+        Four jobs, shared by every plugin built on it, so none of them has to
+        solve any of it again.
       </p>
       <ol class="steps">
         <li>
-          <h3>A player talks to the agent</h3>
-          <p>Players use the <code>/ai</code> command (alias <code>/mcagents</code>) to ask one-off questions, or switch into a dedicated chat mode where every message goes straight to the agent.</p>
+          <h3>One connection to the AI provider</h3>
+          <p>MCAgents talks to OpenRouter, and its endpoint is built in. A server picks which models it offers; a plugin asking for an answer never chooses a provider or holds a connection.</p>
         </li>
         <li>
-          <h3>The plugin resolves the session</h3>
-          <p>Each player has an active session: the model they selected and the OpenRouter key that authorizes them. Operators list the models the server offers; players pick one, or fall back to the server default. The console and the test runner read their own model and key from the plugin configuration on every prompt.</p>
+          <h3>One rule for whose key is spent</h3>
+          <p>Every request says what kind of caller it is for, and that decides which key pays: a player's own, a guild's, or the server's. A new kind of owner plugs into the same rule without changing it.</p>
         </li>
         <li>
-          <h3>The agent thinks and calls tools</h3>
-          <p>The agent answers in natural language, and when it needs live information or wants to act, it calls the plugin's built-in tools or the tools that other plugins have registered — always inside the permission rules of the tool.</p>
+          <h3>One registry of tools</h3>
+          <p>Built-in tools, external scripts, and tools contributed by other plugins all live in one place, so an agent reached through any plugin can call all of them — inside the permission rules of each tool.</p>
         </li>
         <li>
-          <h3>Commands and tools respect Minecraft permissions</h3>
-          <p>Every subcommand has its own permission node, so a server decides exactly who may ask, chat, save prompts, or run the test suite. Tools check who is asking too: regular players can only query themselves, while administrative tools verify operator status before doing anything.</p>
+          <h3>One staged workflow, with caching</h3>
+          <p>A prompt is resolved through a funnel rather than by sending every tool definition on every call, and reused context is cached where the model supports it. Every plugin gets that economy for free.</p>
         </li>
         <li>
-          <h3>Everything is stored centrally</h3>
-          <p>Models, accounts, sessions, saved player prompts, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
+          <h3>One store</h3>
+          <p>Models, accounts, sessions, saved prompts, and conversation logs can live on the central API server, so a whole network of Minecraft servers shares one consistent store.</p>
         </li>
       </ol>
     </section>
@@ -84,27 +108,26 @@
     </section>
 
     <section>
-      <h2>A companion plugin: MCAgentsNPC</h2>
+      <h2>Talking to an agent: MCAgentsChat</h2>
       <p class="section-intro">
-        MCAgentsNPC puts AI driven NPCs on your server &mdash; helpers that gather,
-        farm, fight, keep watch, and follow you, and that take their instructions
-        in plain language. It is a plugin in its own right rather than an
-        extension: it installs and runs on its own, and picks MCAgents up at
-        startup if it is there.
+        Conversation used to live inside this plugin. It is now its own one,
+        MCAgentsChat, which asks MCAgents to answer every message. The split is
+        why a server that never wants in-game chat does not have to install it,
+        and why the core stays a provider.
       </p>
       <div class="grid">
-        <a class="card" href="npc/">
+        <a class="card" href="chat/">
           <h3>What it does</h3>
-          <p>Six behaviours, one at a time, each narrow enough that you can predict what an NPC will and will not do before you ask it.</p>
-          <span class="more">How MCAgentsNPC works →</span>
+          <p>One command opens a conversation, two modes decide whether the agent remembers it, and saved prompts run by id.</p>
+          <span class="more">How MCAgentsChat works &rarr;</span>
         </a>
         <div class="card">
           <h3>It uses your key, through MCAgents</h3>
-          <p>MCAgentsNPC holds no key of its own. Every NPC instruction is answered by MCAgents on the asking player's own account, exactly as a direct question would be.</p>
+          <p>MCAgentsChat holds no key of its own. Every message is answered by MCAgents on the caller's own account, and the console's conversations run on the server's key.</p>
         </div>
         <div class="card">
-          <h3>Optional in both directions</h3>
-          <p>Without MCAgents the NPCs still work &mdash; you name the behaviour instead of describing it. With it, agents also gain two tools for listing and retasking a player's own NPCs.</p>
+          <h3>Required, and it says so</h3>
+          <p>Chatting needs the core, so MCAgentsChat disables itself when MCAgents is missing rather than leaving a command that cannot answer.</p>
         </div>
       </div>
     </section>
@@ -112,10 +135,9 @@
     <section>
       <h2>Extending the agent</h2>
       <p class="section-intro">
-        The essentials ship inside the plugin itself: the <code>/ai</code> command,
-        the chat listener, token management tools, and dynamic custom tool loading.
-        Anything beyond that is added from outside — by your own scripts, or by
-        another plugin that registers tools of its own.
+        The core ships the tools that manage the core itself: keys, models, and
+        saved prompts. Everything beyond that is added from outside — by your own
+        scripts, or by another plugin that registers tools of its own.
       </p>
       <div class="grid">
         <div class="card">
@@ -136,32 +158,25 @@
     <section>
       <h2>Everyday commands</h2>
       <p class="section-intro">
-        Everything is reachable from a single command, explained here in plain words.
+        The core's own command is two settings wide. Everything a player does
+        with an agent is a command in the plugin that owns that feature.
       </p>
       <div class="grid">
         <div class="card">
-          <h3>Ask</h3>
-          <p>Send the agent one question and get one answer — no mode switching, no setup beyond an active session.</p>
+          <h3>Your key</h3>
+          <p>Register the OpenRouter key your requests spend. It is encrypted before it is stored, and it is yours alone &mdash; no plugin built on the core ever sees it.</p>
         </div>
         <div class="card">
-          <h3>Chat mode</h3>
-          <p>Toggle a personal conversation mode where your chat messages go to the agent until you leave the session.</p>
+          <h3>Your model</h3>
+          <p>Choose which of the server's models answers you. Skip it and your requests run on the server default.</p>
         </div>
         <div class="card">
-          <h3>Active model</h3>
-          <p>Choose which of the server's OpenRouter models your session should use. Skip it and your prompts run on the server default.</p>
+          <h3>The server's key</h3>
+          <p>Set once in the configuration, and spent by anything acting for the server &mdash; the console, an administrative action, an automated test run. A player is never charged to it.</p>
         </div>
         <div class="card">
-          <h3>Tokens</h3>
-          <p>Store, change, inspect, or remove your own OpenRouter key. Registering new models for everyone is reserved for operators.</p>
-        </div>
-        <div class="card">
-          <h3>Saved prompts</h3>
-          <p>Ask the agent to save a prompt once, then run it again by id whenever you like. Every player keeps their own prompts with their account, while the server's prompt file belongs to the console alone.</p>
-        </div>
-        <div class="card">
-          <h3>Tool suggestions</h3>
-          <p>When you save a prompt, the agent can point out registered tools that fit it. Nothing is attached automatically — it only adds the tools you confirm.</p>
+          <h3>Everything else lives elsewhere</h3>
+          <p>Conversations are <a href="chat/">MCAgentsChat</a>, NPCs are <a href="npc/">MCAgentsNPC</a>, and your own features are your own plugin. The core keeps no command for talking to an agent.</p>
         </div>
       </div>
     </section>
@@ -170,22 +185,22 @@
       <h2>Testing the agents</h2>
       <p class="section-intro">
         Operators can exercise the whole agent workflow without playing through it
-        by hand. The <code>/ai tester</code> command replays saved prompts and grades
-        the results, so commands, workflow logic, and tools stay reliable as the
-        plugin and its extensions grow.
+        by hand. The test runner lives in <a href="chat/">MCAgentsChat</a> and
+        replays saved prompts against the tools registered here, so workflow logic
+        and tools stay reliable as the ecosystem grows.
       </p>
       <div class="grid">
         <div class="card">
-          <h3>The <code>/ai tester</code> command</h3>
-          <p>Run every saved test for a plugin, or a single one by id. It is reserved for operators and the console because it spends a token and writes files.</p>
+          <h3>Run a suite, or one test</h3>
+          <p>Run every saved test for a plugin, or a single one by id. It is reserved for operators and the console because it spends a key and writes files.</p>
         </div>
         <div class="card">
           <h3>A shared test registry</h3>
-          <p>Tests live in <code>tester.json</code>, grouped by plugin, so the main plugin and every extension keep their regression prompts in one place. Each test can pin the agent to a fixed set of tools or let it run the full workflow.</p>
+          <p>Tests live in one file, grouped by plugin, so the core and every plugin built on it keep their regression prompts in one place. Each test can pin the agent to a fixed set of tools or let it run the full workflow.</p>
         </div>
         <div class="card">
-          <h3>A dedicated tester account</h3>
-          <p>Tests always run on a separate model and key set in the plugin config — independent of any player or the console — so real sessions are never touched.</p>
+          <h3>Always the server's key</h3>
+          <p>A test run is the server's own work, so it spends the server's key whoever starts it. An operator never pays for a test suite out of their own account.</p>
         </div>
         <div class="card">
           <h3>Markdown reports</h3>
@@ -197,18 +212,18 @@
     <section>
       <h2>Who may do what</h2>
       <p class="section-intro">
-        Every <code>/ai</code> subcommand carries its own permission node under the
-        <code>mcpaimon.mcagents.</code> prefix, so access is set per command rather
-        than by operator status alone.
+        Every subcommand carries its own permission node, in the core and in each
+        plugin built on it, so access is set per command rather than by operator
+        status alone.
       </p>
       <div class="grid">
         <div class="card">
           <h3>Open to players by default</h3>
-          <p>Asking, chat mode, saved prompts, choosing a model, and storing a key are allowed out of the box, because a prompt spends the player's own OpenRouter key.</p>
+          <p>Storing a key, choosing a model, and talking to an agent are allowed out of the box, because a request spends the player's own OpenRouter key.</p>
         </div>
         <div class="card">
           <h3>Operators by default</h3>
-          <p>Reloading the server prompt file and running the test suite are restricted, because they touch shared state and spend the server's own key.</p>
+          <p>Reloading shared registries and running the test suite are restricted, because they touch shared state and spend the server's own key.</p>
         </div>
         <div class="card">
           <h3>Tune it per role</h3>

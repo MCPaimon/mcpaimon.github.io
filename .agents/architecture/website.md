@@ -118,6 +118,7 @@ index page that mirrors its latest release:
 | Plugin | Index | Permalinks |
 |---|---|---|
 | MCAgents | `docs/logs/index.html` | `docs/logs/{major}/{minor}/{patch}/index.html` |
+| MCAgentsChat | `docs/logs/chat/index.html` | `docs/logs/chat/{major}/{minor}/{patch}/index.html` |
 | MCAgentsNPC | `docs/logs/npc/index.html` | `docs/logs/npc/{major}/{minor}/{patch}/index.html` |
 
 MCAgents sits at the root of `docs/logs/` for historical reasons — its
@@ -131,7 +132,7 @@ owns every release, and a log page carries an empty placeholder:
 
 ```html
 <aside class="logs-nav" aria-label="Log versions"
-       data-logs-nav data-current="MCAgents:5.1.0" data-back="logs/"></aside>
+       data-logs-nav data-current="MCAgents:6.0.0" data-back="logs/"></aside>
 ```
 
 * `data-current` is `"<product>:<version>"` — the entry to mark as current.

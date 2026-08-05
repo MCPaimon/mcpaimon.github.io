@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCAgentsChat — Talk to AI Agents in Minecraft | MCPaimon</title>
+  <meta name="description" content="MCAgentsChat is the MCPaimon plugin players use to talk to AI agents in game. One command, two conversation modes, and every tool MCAgents has registered.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../styles/main/style.css">
+</head>
+<body data-page="chat" data-root="../">
+  <header class="site-header" data-site-header></header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Plugin</span>
+      <h1>Talk to your <span class="metallic">agents</span><br>in game</h1>
+      <p class="lead">
+        MCAgentsChat is where a conversation happens. One command opens it, your
+        chat messages carry it, and the agent answers with every tool MCAgents
+        has been given — while you keep talking as yourself.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/MCPaimon/mcagents-chat" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="button ghost" href="../logs/chat/">Release notes</a>
+      </div>
+      <div class="platforms" aria-label="Supported platforms">
+        <span>PaperMC</span>
+        <span>SpigotMC</span>
+        <span>FoliaMC</span>
+      </div>
+    </div>
+
+    <section>
+      <div class="notice">
+        MCAgentsChat <strong>requires <a href="../">MCAgents</a></strong>. MCAgents
+        is the core provider — it holds the API keys, the models, and the tools —
+        and this plugin is the way a player reaches it. Installed on its own it
+        disables itself at startup and says so in the log.
+      </div>
+    </section>
+
+    <section>
+      <h2>How a conversation works</h2>
+      <p class="section-intro">
+        Four steps from a chat message to an answer, and nothing in between
+        belongs to this plugin.
+      </p>
+      <ol class="steps">
+        <li>
+          <h3>You open a session</h3>
+          <p><code>/chat</code> starts a conversation the agent remembers; <code>/chat ask</code> starts one where every message is answered on its own. Either way, your ordinary chat messages become the conversation until you type <code>quit</code> or <code>exit</code>.</p>
+        </li>
+        <li>
+          <h3>Your message is claimed, not broadcast</h3>
+          <p>While a session is open your messages go to the agent instead of to public chat, so a conversation never leaks into the server chat around you. The console works the same way: every line typed there goes to the agent until the session ends.</p>
+        </li>
+        <li>
+          <h3>MCAgents answers it</h3>
+          <p>The message is handed to MCAgents with the conversation so far. It resolves the model and the key, runs the staged tool workflow, and returns the reply — so an agent you talk to here can call every tool any plugin has registered there.</p>
+        </li>
+        <li>
+          <h3>The transcript is filed when you leave</h3>
+          <p>A conversation lives in memory while it runs and is written to MCAgents' own chat log when the session ends. This plugin has no database of its own and stores nothing on disk.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Two ways to talk</h2>
+      <p class="section-intro">
+        Both modes can call tools. The difference is whether the agent remembers
+        what you already said.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Chat mode</h3>
+          <p>The prior turns travel with every message, so "keep going" and "do that again for the other one" mean something. Best for working through a problem.</p>
+        </div>
+        <div class="card">
+          <h3>Ask mode</h3>
+          <p>Each message is answered on its own with no memory of the last. Best for a string of unrelated questions, and cheaper, because nothing is replayed.</p>
+        </div>
+        <div class="card">
+          <h3>Saved prompts</h3>
+          <p>Run a prompt you saved earlier by id. Players run their own; the console runs the server's. When the entry names tools, the agent is limited to exactly those.</p>
+        </div>
+        <div class="card">
+          <h3>One request at a time</h3>
+          <p>A player waits for their answer before sending again, so nobody can queue up a dozen requests — and a dozen charges — at once. A hung request releases itself after a countdown.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Whose key pays for it</h2>
+      <p class="section-intro">
+        MCAgentsChat holds no API key. Every request is billed by MCAgents to
+        whoever is talking, decided by what kind of caller they are rather than by
+        what permissions they hold.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>A player spends their own</h3>
+          <p>Your conversation runs on the OpenRouter key you registered with MCAgents. An operator is still a player here: holding a permission node does not start spending the server's key.</p>
+        </div>
+        <div class="card">
+          <h3>The console spends the server's</h3>
+          <p>A conversation started at the console runs as the server, on the key the server configured. So does every automated test run, whoever typed the command.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing to configure here</h3>
+          <p>Keys and models are set with MCAgents' own command. This plugin's configuration is two settings: whether it is on, and how long a request may stay pending.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Testing the agents</h2>
+      <p class="section-intro">
+        Operators can exercise the whole agent workflow without playing through it
+        by hand. <code>/chat tester</code> replays saved prompts and grades the
+        results, so commands, workflow logic, and tools stay reliable as the
+        ecosystem grows.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>A shared test registry</h3>
+          <p>Tests live in one file, grouped by plugin, so MCAgents and every plugin built on it keep their regression prompts in one place. Each test can pin the agent to a fixed set of tools or let it run the full workflow.</p>
+        </div>
+        <div class="card">
+          <h3>Always run as the server</h3>
+          <p>A test run is the server's own work, so it spends the server's key whoever started it. An operator never pays for a test suite out of their own account.</p>
+        </div>
+        <div class="card">
+          <h3>Markdown reports</h3>
+          <p>Each run writes a timestamped report recording the prompt, the agent's result, and an AI-written evaluation summary, so outcomes can be reviewed and compared over time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>It binds to MCAgents at runtime</h2>
+      <p class="section-intro">
+        MCAgentsChat is not built against MCAgents. It finds it on the running
+        server and binds to it there, which is what lets one build of this plugin
+        work beside more than one build of that one.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Found, not compiled in</h3>
+          <p>At startup the plugin looks for MCAgents and for everything it needs from it. A version mismatch becomes a clear line in the log instead of a crash halfway through answering somebody.</p>
+        </div>
+        <div class="card">
+          <h3>Missing means off, not broken</h3>
+          <p>Without MCAgents there is nothing to chat with, so the plugin disables itself rather than leaving a command that cannot answer. The rest of your server is untouched.</p>
+        </div>
+        <div class="card">
+          <h3>Room for more</h3>
+          <p>Each integration lives on its own, so a future binding to another plugin is added beside this one without disturbing it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who may do what</h2>
+      <p class="section-intro">
+        Every <code>/chat</code> subcommand carries its own permission node under
+        the <code>mcpaimon.mcagentschat.</code> prefix, so access is set per
+        command rather than by operator status alone.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Open to players by default</h3>
+          <p>Both conversation modes and running a saved prompt are allowed out of the box, because a message spends the player's own key.</p>
+        </div>
+        <div class="card">
+          <h3>Operators by default</h3>
+          <p>Reloading the registries and running the test suite are restricted, because they touch shared state and spend the server's key.</p>
+        </div>
+        <div class="card">
+          <h3>Hidden, not just blocked</h3>
+          <p>The help menu and tab completion show only the subcommands you actually hold, so a withheld command never appears as a dead end.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        This site explains how the ecosystem works. Setup guides, the full
+        configuration reference, and source code live in the
+        <a href="https://github.com/MCPaimon/mcagents-chat" target="_blank" rel="noopener">mcagents-chat</a>
+        repository.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="../scripts/main/chrome.js"></script>
+  <script src="../scripts/main/script.js"></script>
+</body>
+</html>

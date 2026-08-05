@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Log 0.0.0 — MCAgentsChat | MCPaimon</title>
+  <meta name="description" content="Release notes for MCAgentsChat version 0.0.0 — the first release of the dedicated chatting plugin, with two conversation modes, saved prompts, and a test runner.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../../../styles/main/style.css">
+  <link rel="stylesheet" href="../../../../../styles/logs/logs.css">
+</head>
+<body data-page="logs" data-root="../../../../../">
+  <header class="site-header" data-site-header></header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../../../../../chat/">MCAgentsChat</a><span class="sep">/</span>
+      <a href="../../../">Change Logs</a><span class="sep">/</span><span>0.0.0</span>
+    </nav>
+
+    <section>
+      <span class="eyebrow">Release notes</span>
+      <h1>Change Log — 0.0.0</h1>
+      <p class="section-intro">Permalink for MCAgentsChat version 0.0.0.</p>
+    </section>
+
+    <div class="logs-layout">
+      <article class="log-entry">
+        <div class="log-entry__head">
+          <span class="log-entry__version">0.0.0</span>
+          <span class="badge everyone">Latest</span>
+          <span class="log-entry__date">2026-08-05 &middot; Conversation gets its own plugin</span>
+        </div>
+        <p class="lead">The first release of MCAgentsChat, the plugin players use to talk to AI agents in game. Everything here used to live inside MCAgents; it now stands on its own, and MCAgents is the core it asks.</p>
+
+        <div class="notice">
+          <strong>Requires MCAgents 6.0.0 or newer.</strong> MCAgents holds the API keys, the models, and the tools. Installed without it, MCAgentsChat disables itself at startup and says so in the log.
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> One command for talking to an agent</h3>
+          <ul>
+            <li><code>/chat</code> opens a conversation the agent remembers: the earlier turns travel with each message, so a follow-up like "keep going" means something.</li>
+            <li><code>/chat ask</code> opens one it does not remember. Each message is answered on its own, which is cheaper because nothing is replayed, and better for a string of unrelated questions.</li>
+            <li>While a session is open your ordinary chat messages are the conversation &mdash; and they are claimed before anything else sees them, so a conversation never leaks into public chat. Type <code>quit</code> or <code>exit</code> to leave.</li>
+            <li>The console works the same way, so an operator can talk to an agent straight from the server terminal. While that session is open every console line goes to the agent.</li>
+            <li>Both modes can call tools. Everything registered with MCAgents &mdash; built in, scripted, or contributed by another plugin &mdash; is available while you talk.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> Saved prompts and a test runner</h3>
+          <ul>
+            <li><code>/chat prompt &lt;id&gt;</code> runs a prompt you saved earlier. Players run their own; the console runs the server's. Run it bare to list what you have.</li>
+            <li>When a saved prompt names tools, the agent is limited to exactly those, which makes a prompt a reliable shortcut rather than a fresh guess each time.</li>
+            <li><code>/chat tester &lt;plugin&gt; [id]</code> replays a suite of saved test prompts and writes a Markdown report for each, recording the prompt, the result, and an AI-written evaluation.</li>
+            <li>Tests are grouped by plugin in one file, so MCAgents and every plugin built on it keep their regression prompts in one place.</li>
+            <li><code>/chat reload</code> rereads the test registry, and asks MCAgents to reread its prompt registry, without a restart.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> It never holds your key</h3>
+          <ul>
+            <li>MCAgentsChat stores no API key and selects no model. Every message is answered by MCAgents on the caller's own account, exactly as a request made anywhere else in the ecosystem would be.</li>
+            <li>A player's conversation spends the key they registered with MCAgents. A conversation started at the console spends the server's key, and so does every test run, whoever typed the command.</li>
+            <li>An operator chatting in game is still charged as a player. Holding a permission node does not start spending the server's key.</li>
+            <li>Its own configuration is two settings: whether the plugin is on, and how long a request may stay pending before the player is released.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--new">Added</span> A countdown, so one player cannot flood it</h3>
+          <ul>
+            <li>A player waits for their answer before sending again, so nobody can queue up a dozen requests &mdash; and a dozen charges against their own key &mdash; while the first is still being answered.</li>
+            <li>A request that hangs releases them after the countdown rather than leaving them stuck in a session.</li>
+            <li>The console and operators are exempt.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--note">Note</span> How it binds to MCAgents</h3>
+          <ul>
+            <li>MCAgentsChat is not built against MCAgents. It finds it on the running server at startup and binds to it there, which is why one build of this plugin works beside more than one build of that one.</li>
+            <li>A version it cannot talk to becomes one clear line in the log instead of a crash halfway through answering somebody.</li>
+            <li>If the binding fails, the plugin switches itself off rather than leaving a command that cannot answer. Nothing else on your server is affected.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--note">Note</span> Coming from MCAgents 5.x</h3>
+          <ul>
+            <li><code>/ai chat</code> is <code>/chat</code>, <code>/ai ask</code> is <code>/chat ask</code>, <code>/ai prompt</code> is <code>/chat prompt</code>, and <code>/ai tester</code> is <code>/chat tester</code>.</li>
+            <li>Your key and your model are still set in MCAgents, with its renamed command. Stored keys carry over untouched.</li>
+            <li>Test runs no longer need a tester account of their own &mdash; they use the server's key.</li>
+            <li>The plugin ships disabled. Dropping the jar into a server changes nothing until an operator turns it on and restarts.</li>
+          </ul>
+        </div>
+
+        <div class="log-section">
+          <h3><span class="log-tag log-tag--note">Note</span> Installing</h3>
+          <ul>
+            <li>The universal <code>MCAgentsChat</code> jar detects whether it is running on PaperMC, SpigotMC, or Folia at startup and installs the matching scheduling support, so one file works on any of them.</li>
+            <li>Three per-server builds are published alongside it for anyone who wants a smaller artifact targeted at one platform.</li>
+            <li>There is no database to set up and no key to register here. The plugin stores nothing: a conversation lives in memory and its transcript is filed with MCAgents when the session ends.</li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="logs-nav" aria-label="Log versions" data-logs-nav data-current="MCAgentsChat:0.0.0" data-back="logs/chat/"></aside>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="../../../../../scripts/main/chrome.js"></script>
+  <script src="../../../../../scripts/logs/logs-nav.js"></script>
+  <script src="../../../../../scripts/main/script.js"></script>
+</body>
+</html>
