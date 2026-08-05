@@ -21,8 +21,6 @@ This file is the entry point for any agent working in this repository. Read it f
 |---|---|
 | docs/index.html | `/` — how the MCAgents main plugin works. |
 | docs/npc/index.html | `/npc/` — how the MCAgentsNPC plugin works. |
-| docs/playertools/index.html | `/playertools/` — how the PlayerTools extension works. |
-| docs/servertools/index.html | `/servertools/` — how the ServerTools extension works. |
 | docs/logs/index.html | `/logs/` — the latest MCAgents release log; mirrors the newest versioned page. |
 | docs/logs/{major}/{minor}/{patch}/index.html | Permalink for one released MCAgents version (`1/0/0`, `2/0/0`, `3/0/0`, `3/1/0`, `4/0/0`, `5/0/0`, `5/1/0`). |
 | docs/logs/npc/index.html | `/logs/npc/` — the latest MCAgentsNPC release log. |

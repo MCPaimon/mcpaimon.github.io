@@ -8,8 +8,6 @@ The MCPaimon organization website, served by GitHub Pages from the [`docs/`](doc
 |---|---|
 | `/` | The MCAgents main plugin: commands, sessions, tools, and the central API server. |
 | `/npc/` | The MCAgentsNPC plugin: AI driven NPCs, what they do, and what they remember. |
-| `/playertools/` | The PlayerTools extension: player information and administration tools. |
-| `/servertools/` | The ServerTools extension: server status and performance tools. |
 | `/logs/` | The latest MCAgents release log. |
 | `/logs/{major}/{minor}/{patch}/` | Permalink for one released MCAgents version. |
 | `/logs/npc/` | The latest MCAgentsNPC release log. |
