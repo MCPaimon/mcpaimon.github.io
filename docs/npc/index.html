@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCAgentsNPC — AI Driven NPCs for Minecraft | MCPaimon</title>
+  <meta name="description" content="MCAgentsNPC is the MCPaimon plugin that puts AI driven NPCs on a Minecraft server. NPCs gather, farm, fight, observe, and follow, and take their instructions in plain language.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../styles/main/style.css">
+</head>
+<body data-page="npc" data-root="../">
+  <header class="site-header" data-site-header></header>
+
+  <main>
+    <div class="hero">
+      <span class="eyebrow">Plugin</span>
+      <h1>NPCs that <span class="metallic">understand</span><br>what you ask for</h1>
+      <p class="lead">
+        MCAgentsNPC puts AI driven NPCs on your server. They gather, farm, fight,
+        keep watch, and follow you around — and you tell them which of those you
+        want in your own words, not with a menu.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/MCPaimon/mcagents-npc" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="button ghost" href="../logs/npc/">Release notes</a>
+      </div>
+      <div class="platforms" aria-label="Supported platforms">
+        <span>PaperMC</span>
+        <span>SpigotMC</span>
+        <span>FoliaMC</span>
+      </div>
+    </div>
+
+    <section>
+      <div class="notice">
+        MCAgentsNPC is a <strong>standalone plugin</strong>, not an MCAgents
+        extension. It installs and runs on its own. When
+        <a href="../">MCAgents</a> is installed alongside it, the NPCs gain
+        language; without it, everything that does not need an AI keeps working.
+      </div>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <p class="section-intro">
+        An instruction becomes a behaviour in four steps, and the NPC keeps just
+        enough of the conversation to follow up on it.
+      </p>
+      <ol class="steps">
+        <li>
+          <h3>You tell an NPC what you want</h3>
+          <p>"There is iron in the cave below, go get it." Naming a behaviour outright works too, and costs nothing — the words are for when you would rather not think about which behaviour that is.</p>
+        </li>
+        <li>
+          <h3>The NPC looks around first</h3>
+          <p>Before asking anything, it reports what it can actually see: who is nearby, what creatures are around, what it is standing on, and whether it is day or night. That goes to the agent along with your instruction, so the answer is about your situation rather than a generic one.</p>
+        </li>
+        <li>
+          <h3>The agent picks a behaviour and replies</h3>
+          <p>One short line back to you, and one behaviour the NPC switches to. If your message was a question rather than an order, it answers without interrupting what it was doing.</p>
+        </li>
+        <li>
+          <h3>The exchange is compressed and remembered</h3>
+          <p>Not the words you typed — a summary of them. So your next message can be "keep at it until you have enough" and the NPC knows what "it" was.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>What an NPC can do</h2>
+      <p class="section-intro">
+        Six behaviours, one at a time. Each is deliberately narrow, so what an
+        NPC will and will not do is something you can predict before you ask.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <span class="tool-name">gather</span>
+          <p>Walks to nearby resource blocks, breaks them, and keeps the drops for you to collect. Only the blocks an operator listed — an NPC can never dig up something you did not permit.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">farm</span>
+          <p>Harvests fully grown crops and <strong>replants them</strong>. The field an NPC works stays a field; it never leaves you with cleared ground.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">fight</span>
+          <p>Attacks hostile mobs that come within range, on a cooldown so a fight takes about as long as yours would. Players, animals, and villagers are never targets — that is a rule of the behaviour, not a setting.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">observe</span>
+          <p>Keeps watch and changes nothing. It reports only when what it sees has changed, so a lookout is useful without becoming noise.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">follow</span>
+          <p>Stays a few blocks behind you and stops once it is close enough, so it does not shuffle about while you stand still.</p>
+        </div>
+        <div class="card">
+          <span class="tool-name">idle</span>
+          <p>Stands and waits. Where an NPC starts, and where it returns when a task is done.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What it remembers, and for how long</h2>
+      <p class="section-intro">
+        An NPC remembers a conversation only while that conversation is alive —
+        and only ever as a summary.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Summaries, not transcripts</h3>
+          <p>Every remembered turn is replayed into the next request, so anything stored verbatim would be paid for again on every message that follows it. Each exchange is compressed to its shortest form and only that is kept.</p>
+        </div>
+        <div class="card">
+          <h3>Five minutes of quiet, then gone</h3>
+          <p>Go five minutes without giving an NPC a new task and it forgets the conversation entirely. The window is configurable; asking to see the memory does not extend it.</p>
+        </div>
+        <div class="card">
+          <h3>Nothing is written down</h3>
+          <p>There is no database and no file. Short term context lives in memory for as long as the server runs, and a restart forgets all of it.</p>
+        </div>
+        <div class="card">
+          <h3>You can look at it</h3>
+          <p>Memory that summarises itself and then deletes itself is hard to trust, so there is a command that shows exactly what an NPC is about to replay — and one that clears it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Working with MCAgents</h2>
+      <p class="section-intro">
+        MCAgents is optional, and the way MCAgentsNPC depends on it is the part
+        worth understanding before you install either.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Bound at startup, not built in</h3>
+          <p>MCAgentsNPC is not compiled against MCAgents at all. It finds it on the running server and binds to it there, which is why it loads cleanly on a server that has no MCAgents, and on one whose MCAgents is a different version.</p>
+        </div>
+        <div class="card">
+          <h3>It disables the integration, not itself</h3>
+          <p>If the binding fails, one clear line goes to the log and the language features switch off. NPCs still spawn and every behaviour still runs — you set them by name instead of by sentence.</p>
+        </div>
+        <div class="card">
+          <h3>Your key, not the plugin's</h3>
+          <p>MCAgentsNPC holds no API key of its own. Every request is made by MCAgents on the asking account's key, so a player's instruction spends that player's key exactly as a direct question to MCAgents would.</p>
+        </div>
+        <div class="card">
+          <h3>It works the other way too</h3>
+          <p>MCAgentsNPC hands MCAgents two tools of its own, so a player already talking to an agent can ask what their NPCs are doing and retask them — without touching the NPC command. Both are limited to that player's own NPCs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Everyday commands</h2>
+      <p class="section-intro">
+        One command covers all of it, and every subcommand has its own
+        permission node.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Spawn and remove</h3>
+          <p>An NPC appears where you are standing, named. Three per player by default, and they leave with you when you log out.</p>
+        </div>
+        <div class="card">
+          <h3>Set a behaviour</h3>
+          <p>Name what you want directly. Free, instant, and works on a server with no AI installed at all.</p>
+        </div>
+        <div class="card">
+          <h3>Give a task in words</h3>
+          <p>Describe the goal and let the agent choose the behaviour. This is the one that spends an AI request — and the one that remembers.</p>
+        </div>
+        <div class="card">
+          <h3>Collect what it gathered</h3>
+          <p>An NPC keeps its drops rather than scattering them on the floor. Take them when you are ready; anything that will not fit lands at your feet.</p>
+        </div>
+        <div class="card">
+          <h3>Inspect the memory</h3>
+          <p>See the summaries an NPC is carrying, or clear them, without waiting for the idle window to do it for you.</p>
+        </div>
+        <div class="card">
+          <h3>Reload</h3>
+          <p>Re-reads the configuration and starts clean. Reserved for operators, because it removes every NPC on the server — including other people's.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who may do what</h2>
+      <p class="section-intro">
+        Ownership and permission are two different questions here, and are
+        answered separately.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Open to players by default</h3>
+          <p>Spawning, commanding, collecting, and talking to an NPC are allowed out of the box. There is nothing shared to protect: a task spends the player's own AI key.</p>
+        </div>
+        <div class="card">
+          <h3>Operators by default</h3>
+          <p>Only reloading is restricted, because it is the one action that reaches other players' NPCs.</p>
+        </div>
+        <div class="card">
+          <h3>Yours is yours</h3>
+          <p>A player may command their own NPCs and nobody else's, whatever nodes they hold. Operators may command any. That is enforced in the command itself, because no permission node can express it.</p>
+        </div>
+        <div class="card">
+          <h3>Hidden, not just blocked</h3>
+          <p>The help menu and tab completion list only the subcommands you actually hold, so a withheld command never appears as a dead end.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Good to know before you install</h2>
+      <p class="section-intro">
+        The limits are as worth knowing as the features.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>NPCs step, they do not path</h3>
+          <p>An NPC moves towards its goal a step at a time. It climbs one block and drops a few, and gives up on anything it cannot reach that way. Excellent in a field, a quarry, or a cleared cave; poor in a maze.</p>
+        </div>
+        <div class="card">
+          <h3>They stay where you put them</h3>
+          <p>An NPC that wanders too far from where its behaviour started walks back, so it works the area you pointed it at rather than drifting across the map.</p>
+        </div>
+        <div class="card">
+          <h3>You cannot hit them</h3>
+          <p>Player damage to an NPC is cancelled — they cannot defend themselves against you, and a misclick would cost you the helper and everything it had gathered. Creepers, falls, and lava still count.</p>
+        </div>
+        <div class="card">
+          <h3>Off until you turn it on</h3>
+          <p>The plugin ships disabled, so dropping the jar into a server changes nothing until an operator says so.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="notice">
+        This site explains how the ecosystem works. Setup guides, the full
+        configuration reference, and source code live in the
+        <a href="https://github.com/MCPaimon/mcagents-npc" target="_blank" rel="noopener">mcagents-npc</a>
+        repository.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script src="../scripts/main/chrome.js"></script>
+  <script src="../scripts/main/script.js"></script>
+</body>
+</html>
