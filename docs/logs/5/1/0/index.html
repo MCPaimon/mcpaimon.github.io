@@ -9,19 +9,8 @@
   <link rel="stylesheet" href="../../../../styles/main/style.css">
   <link rel="stylesheet" href="../../../../styles/logs/logs.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="inner">
-      <a class="brand" href="../../../../"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="../../../../">MCAgents</a>
-        <a href="../../../../playertools/">PlayerTools</a>
-        <a href="../../../../servertools/">ServerTools</a>
-        <a href="../../../" aria-current="page">Logs</a>
-        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
+<body data-page="logs" data-root="../../../../">
+  <header class="site-header" data-site-header></header>
 
   <main>
     <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -65,34 +54,14 @@
         </div>
       </article>
 
-      <aside class="logs-nav" aria-label="Log versions">
-        <h4>MCAgents</h4>
-        <ul>
-          <li><a class="is-current" href="../../../">5.1.0 <span class="latest">Latest</span></a></li>
-          <li><a href="../../../5/0/0/">5.0.0</a></li>
-          <li><a href="../../../4/0/0/">4.0.0</a></li>
-          <li><a href="../../../3/1/0/">3.1.0</a></li>
-          <li><a href="../../../3/0/0/">3.0.0</a></li>
-          <li><a href="../../../2/0/0/">2.0.0</a></li>
-          <li><a href="../../../1/0/0/">1.0.0</a></li>
-        </ul>
-        <p class="back"><a href="../../../">&larr; Back to latest</a></p>
-      </aside>
+      <aside class="logs-nav" aria-label="Log versions" data-logs-nav data-current="MCAgents:5.1.0" data-back="logs/"></aside>
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="inner">
-      <span>&copy; 2026 MCPaimon</span>
-      <span>
-        <a href="../../../../">MCAgents</a> &middot;
-        <a href="../../../../playertools/">PlayerTools</a> &middot;
-        <a href="../../../../servertools/">ServerTools</a> &middot;
-        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">Repository</a>
-      </span>
-    </div>
-  </footer>
+  <footer class="site-footer" data-site-footer></footer>
 
+  <script src="../../../../scripts/main/chrome.js"></script>
+  <script src="../../../../scripts/logs/logs-nav.js"></script>
   <script src="../../../../scripts/main/script.js"></script>
 </body>
 </html>

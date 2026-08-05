@@ -8,19 +8,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23767f8d'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles/main/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="inner">
-      <a class="brand" href="./"><span class="mark" aria-hidden="true"></span>MCPaimon</a>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="./" aria-current="page">MCAgents</a>
-        <a href="playertools/">PlayerTools</a>
-        <a href="servertools/">ServerTools</a>
-        <a href="logs/">Logs</a>
-        <a href="https://github.com/MCPaimon" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
+<body data-page="mcagents" data-root="./">
+  <header class="site-header" data-site-header></header>
 
   <main>
     <div class="hero">
@@ -90,6 +79,32 @@
         <div class="card">
           <h3>Shared across servers</h3>
           <p>Because storage is centralized, players keep their sessions and history when they hop between the Minecraft servers of a network.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>A companion plugin: MCAgentsNPC</h2>
+      <p class="section-intro">
+        MCAgentsNPC puts AI driven NPCs on your server &mdash; helpers that gather,
+        farm, fight, keep watch, and follow you, and that take their instructions
+        in plain language. It is a plugin in its own right rather than an
+        extension: it installs and runs on its own, and picks MCAgents up at
+        startup if it is there.
+      </p>
+      <div class="grid">
+        <a class="card" href="npc/">
+          <h3>What it does</h3>
+          <p>Six behaviours, one at a time, each narrow enough that you can predict what an NPC will and will not do before you ask it.</p>
+          <span class="more">How MCAgentsNPC works →</span>
+        </a>
+        <div class="card">
+          <h3>It uses your key, through MCAgents</h3>
+          <p>MCAgentsNPC holds no key of its own. Every NPC instruction is answered by MCAgents on the asking player's own account, exactly as a direct question would be.</p>
+        </div>
+        <div class="card">
+          <h3>Optional in both directions</h3>
+          <p>Without MCAgents the NPCs still work &mdash; you name the behaviour instead of describing it. With it, agents also gain two tools for listing and retasking a player's own NPCs.</p>
         </div>
       </div>
     </section>
@@ -219,19 +234,9 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="inner">
-      <span>© 2026 MCPaimon</span>
-      <span>
-        <a href="https://github.com/MCPaimon/mcagents" target="_blank" rel="noopener">MCAgents</a> ·
-        <a href="https://github.com/MCPaimon/extension-playertools" target="_blank" rel="noopener">PlayerTools</a> ·
-        <a href="https://github.com/MCPaimon/extension-servertools" target="_blank" rel="noopener">ServerTools</a> ·
-        <a href="logs/">Logs</a> ·
-        <a href="https://github.com/MCEngine/server-expressjs" target="_blank" rel="noopener">Central Server</a>
-      </span>
-    </div>
-  </footer>
+  <footer class="site-footer" data-site-footer></footer>
 
-  <script src="scripts/main/script.js"></script>
+  <script src="./scripts/main/chrome.js"></script>
+  <script src="./scripts/main/script.js"></script>
 </body>
 </html>
