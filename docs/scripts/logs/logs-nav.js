@@ -38,6 +38,7 @@
       product: "MCAgents",
       index: "logs/",
       versions: [
+        { version: "6.0.0", href: "logs/6/0/0/" },
         { version: "5.1.0", href: "logs/5/1/0/" },
         { version: "5.0.0", href: "logs/5/0/0/" },
         { version: "4.0.0", href: "logs/4/0/0/" },
@@ -45,6 +46,13 @@
         { version: "3.0.0", href: "logs/3/0/0/" },
         { version: "2.0.0", href: "logs/2/0/0/" },
         { version: "1.0.0", href: "logs/1/0/0/" }
+      ]
+    },
+    {
+      product: "MCAgentsChat",
+      index: "logs/chat/",
+      versions: [
+        { version: "0.0.0", href: "logs/chat/0/0/0/" }
       ]
     },
     {
